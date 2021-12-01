@@ -21,15 +21,12 @@
     <ClCompile Include="day1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="common.cpp">
+    <ClCompile Include="day2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="day1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

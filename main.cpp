@@ -1,10 +1,15 @@
-#include "day1.h"
+#include <iostream>
 
-#include <cstdlib>
+extern void day1();
+extern void day2();
 
 int main()
 {
-    day1();
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(NULL);
 
-    return EXIT_SUCCESS;
+    day1();
+    day2();
+
+    return 0;
 }

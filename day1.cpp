@@ -1,5 +1,3 @@
-#include "day1.h"
-
 #include "common.h"
 
 void day1() {
@@ -8,7 +6,7 @@ void day1() {
 	{ // start part one
 		U64 answer = 0;
 
-		for (auto idx = 1; idx < depths.size(); idx++) {
+		for (size_t idx = 1; idx < depths.size(); idx++) {
 			answer += depths[idx] > depths[idx - 1];
 		}
 
@@ -19,7 +17,7 @@ void day1() {
 		U64 answer = 0;
 
 		S64 last_sum = depths[0] + depths[1] + depths[2];
-		for (auto idx = 3; idx < depths.size(); idx++) {
+		for (size_t idx = 3; idx < depths.size(); idx++) {
 			const S64 next_sum = depths[idx] + depths[idx - 1] + depths[idx - 2];
 			answer += next_sum > last_sum;
 			last_sum = next_sum;
@@ -27,5 +25,7 @@ void day1() {
 
 		std::cout << "1.2) " << answer << std::endl;
 	} // end part two
+
+	std::cout << std::endl;
 }
 

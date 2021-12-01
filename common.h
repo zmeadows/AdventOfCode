@@ -1,11 +1,14 @@
 #pragma once
 
 #include <cstdint>
+#include <cstdio>
 #include <fstream>
+#include <ios>
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <vector>
+#include <unordered_map>
+#include <unordered_set>
 
 using U64 = uint64_t;
 using U32 = uint32_t;
@@ -25,9 +28,10 @@ std::vector<T> read_file_lines_as(const std::string& input_file) {
 	const std::string input_path = std::string(_SOLUTIONDIR) + "inputs\\" + input_file;
 	std::ifstream infile(input_path);
 
-	std::vector<T> results; results.reserve(2048);
+	std::vector<T> results;
 
-	std::string line; T val;
+	std::string line;
+	T val = {};
 	while (std::getline(infile, line)) {
 		std::stringstream ss(line);
 		while (ss >> val) {
@@ -37,3 +41,4 @@ std::vector<T> read_file_lines_as(const std::string& input_file) {
 
 	return results;
 }
+
