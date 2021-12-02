@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <cstdio>
+#include <format>
 #include <fstream>
 #include <ios>
 #include <iostream>
@@ -10,21 +11,19 @@
 #include <unordered_map>
 #include <unordered_set>
 
-using U64 = uint64_t;
-using U32 = uint32_t;
-using U16 = uint16_t;
-using U8 = uint8_t;
+#define FOR(X,Y) for (size_t X = 0; X < Y; X++)
+#define FORN(X,Y,N) for (size_t X = 0; X < Y; X += N)
 
-using S64 = int64_t;
-using S32 = int32_t;
-using S16 = int16_t;
-using S8 = int8_t;
+using I = int64_t;
+using R = double;
 
-using F32 = float;
-using F64 = double;
+using S = std::string;
 
 template <typename T>
-std::vector<T> read_file_lines_as(const std::string& input_file) {
+using V = std::vector<T>;
+
+template <typename T>
+std::vector<T> readfile(const std::string& input_file) {
 	const std::string input_path = std::string(_SOLUTIONDIR) + "inputs\\" + input_file;
 	std::ifstream infile(input_path);
 
@@ -40,5 +39,20 @@ std::vector<T> read_file_lines_as(const std::string& input_file) {
 	}
 
 	return results;
+}
+
+template <typename FmtType, class... Args>
+void out(const FmtType& fmt, Args&& ...args)
+{
+	std::cout << std::format(fmt, std::forward<Args>(args)...);
+}
+
+template <typename T>
+T sum(const std::vector<T>& vec, size_t start, size_t end) {
+	T res = {};
+	for (size_t i = start; i <= end; i++) {
+		res += vec[i];
+	}
+	return res;
 }
 

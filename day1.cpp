@@ -2,29 +2,25 @@
 
 void day1()
 {
-	const std::vector<S64> depths = read_file_lines_as<S64>("1a.txt");
+	auto in = readfile<I>("1a.txt");
 
 	{ // start part one
-		U64 answer = 0;
-
-		for (size_t idx = 1; idx < depths.size(); idx++) {
-			answer += static_cast<U64>(depths[idx] > depths[idx - 1]);
-		}
-
-		std::cout << "1.1) " << answer << std::endl;
+		I X = 0;
+		FOR(Q, in.size())
+			X += in[Q] > in[Q - 1];
+		out("1.1) {}\n", X);
 	} // end part one
 
 	{ // start part two
-		U64 answer = 0;
-
-		S64 last_sum = depths[0] + depths[1] + depths[2];
-		for (size_t idx = 3; idx < depths.size(); idx++) {
-			const S64 next_sum = depths[idx] + depths[idx - 1] + depths[idx - 2];
-			answer += static_cast<U64>(next_sum > last_sum);
-			last_sum = next_sum;
+		I X = 0;
+		I last = sum(in, 0, 2);
+		for (size_t idx = 3; idx < in.size(); idx++) {
+			I next = sum(in, idx - 2, idx);
+			X += next > last;
+			last = next;
 		}
 
-		std::cout << "1.2) " << answer << std::endl;
+		out("1.2) {}\n", X);
 	} // end part two
 }
 

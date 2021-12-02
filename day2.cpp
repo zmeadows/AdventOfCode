@@ -2,54 +2,43 @@
 
 void day2()
 {
-	const std::vector<std::string> input = read_file_lines_as<std::string>("2a.txt");
+	auto in = readfile<S>("2a.txt");
 
 	{ // start part one
-		S64 position = 0;
-		S64 depth = 0;
+		I pos = 0;
+		I dep = 0;
 
-		for (size_t idx = 0; idx < input.size() - 1; idx += 2) {
-			const std::string& instruction = input[idx];
-			const S64 X = std::stoll(input[idx+1]);
+		FORN(idx, in.size() - 1, 2) {
+			S& Q = in[idx];
+			I X = std::stoll(in[idx + 1]);
 
-			if (instruction == "forward") {
-				position += X;
-			}
-			else if (input[idx] == "up") {
-				depth -= X;
-			}
-			else if (input[idx] == "down") {
-				depth += X;
-			}
-			else {
-				throw;
-			}
+			if (Q == "forward") pos += X;
+			else if (Q == "up") dep -= X;
+			else if (Q == "down") dep += X;
+			else throw;
 		}
 
-		std::cout << "2.1) " << depth * position << std::endl;
+		out("2.1) {}\n", dep * pos);
 	} // end part one
 
 	{ // start part two
-		S64 aim = 0;
-		S64 position = 0;
-		S64 depth = 0;
+		I aim = 0;
+		I pos = 0;
+		I dep = 0;
 
-		for (size_t idx = 0; idx < input.size() - 1; idx += 2) {
-			const std::string& instruction = input[idx];
-			const S64 X = std::stoll(input[idx+1]);
+		FORN(idx, in.size() - 1, 2) {
+			S& Q = in[idx];
+			I X = std::stoll(in[idx + 1]);
 
-			if (instruction == "forward") {
-				position += X;
-				depth += aim * X;
+			if (Q == "forward") {
+				pos += X;
+				dep += aim * X;
 			}
-			else if (instruction == "up") {
-				aim -= X;
-			}
-			else if (instruction == "down") {
-				aim += X;
-			}
+			else if (Q == "up") aim -= X;
+			else if (Q == "down") aim += X;
+			else throw;
 		}
 
-		std::cout << "2.2) " << depth * position << std::endl;
+		out("2.2) {}\n", dep * pos);
 	} // end part two
 }

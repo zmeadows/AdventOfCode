@@ -2,6 +2,7 @@
 
 extern void day1();
 extern void day2();
+extern void day3();
 
 int main()
 {
@@ -10,6 +11,9 @@ int main()
 
     day1();
     day2();
+    day3();
+
+    std::cout << std::endl;
 
     return 0;
 }
