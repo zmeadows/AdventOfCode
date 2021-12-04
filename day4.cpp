@@ -2,7 +2,8 @@
 
 using Board = Grid<S64, 5, 5>;
 
-static bool check_row(const Board& board, const std::unordered_set<S64>& calls, size_t row_idx)
+static __forceinline bool check_row(
+	const Board& board, const std::unordered_set<S64>& calls, size_t row_idx)
 {
 	for (size_t col_idx = 0; col_idx < 5; col_idx++) {
 		if (calls.find(board[row_idx][col_idx]) == calls.end()) {
@@ -13,7 +14,8 @@ static bool check_row(const Board& board, const std::unordered_set<S64>& calls, 
 	return true;
 }
 
-static bool check_col(const Board& board, const std::unordered_set<S64>& calls, size_t col_idx)
+static __forceinline bool check_col(
+	const Board& board, const std::unordered_set<S64>& calls, size_t col_idx)
 {
 	for (size_t row_idx = 0; row_idx < 5; row_idx++) {
 		if (calls.find(board[row_idx][col_idx]) == calls.end()) {
@@ -49,14 +51,14 @@ static S64 score_board(
 	S64 unmarked_sum = 0;
 	for (size_t row_idx = 0; row_idx < 5; row_idx++) {
 		for (size_t col_idx = 0; col_idx < 5; col_idx++) {
-			S64 entry = board[row_idx][col_idx];
+			const S64 entry = board[row_idx][col_idx];
 			if (winning_calls.find(entry) == winning_calls.end()) {
 				unmarked_sum += entry;
 			}
 		}
 	}
 
-	return unmarked_sum * call_order[winning_calls.size() - 1];
+	return unmarked_sum * call_order.at(winning_calls.size() - 1);
 }
 
 void day4()
@@ -104,7 +106,6 @@ void day4()
 	} // end part one
 
 	{ // start part two
-
 		std::unordered_set<S64> first_N_calls;
 		S64 score = 0;
 
