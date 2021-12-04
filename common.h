@@ -49,7 +49,7 @@ __forceinline std::ifstream open_input_file(const std::string& input_file)
 }
 
 template <typename T>
-__forceinline std::vector<T> split(const std::string& input, char delim)
+std::vector<T> split(const std::string& input, char delim)
 {
 	std::stringstream ss(input);
 
