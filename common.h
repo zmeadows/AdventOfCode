@@ -1,5 +1,6 @@
 #pragma once
 
+#include <array>
 #include <cassert>
 #include <cstdint>
 #include <cstdio>
@@ -7,6 +8,7 @@
 #include <fstream>
 #include <ios>
 #include <iostream>
+#include <optional>
 #include <sstream>
 #include <string>
 #include <unordered_map>
@@ -36,11 +38,87 @@ using F64 = double;
 static_assert(sizeof(F64) == 8);
 static_assert(sizeof(F32) == 4);
 
+template <typename T, size_t M, size_t N>
+using Grid = std::array<std::array<T, N>, M>;
+
+
+__forceinline std::ifstream open_input_file(const std::string& input_file)
+{
+	const std::string full_input_path = std::string(_SOLUTIONDIR) + "inputs\\" + input_file;
+	return std::ifstream(full_input_path);
+}
+
+template <typename T>
+__forceinline std::vector<T> split(const std::string& input, char delim)
+{
+	std::stringstream ss(input);
+
+	std::vector<T> result;
+
+	T val = {};
+	while (ss >> val) {
+		result.push_back(val);
+		if (ss.peek() == delim) {
+			ss.ignore();
+		}
+	}
+
+	return result;
+}
+
+template <size_t N, size_t M>
+__forceinline bool parse_grid(std::ifstream& input, Grid<S64, M, N>& grid, char delim = ' ')
+{
+	std::string row_string;
+
+	// skip all initial empty lines
+	while (std::getline(input, row_string)) {
+		if (!row_string.empty()) {
+			break;
+		}
+	}
+
+	size_t row_idx = 0;
+
+	do {
+		if (row_string.empty()) {
+			break;
+		}
+
+		std::stringstream row_stream(row_string);
+		while (row_stream.peek() == delim) {
+			row_stream.ignore();
+		}
+
+		size_t col_idx = 0;
+
+		std::string entry;
+		while (std::getline(row_stream, entry, delim)) {
+			grid[row_idx][col_idx] = std::stoll(entry);
+			col_idx++;
+			while (row_stream.peek() == delim) {
+				row_stream.ignore();
+			}
+		}
+		if (col_idx != N) {
+			return false;
+		}
+
+		row_idx++;
+
+	} while (std::getline(input, row_string));
+
+	if (row_idx != M) {
+		return false;
+	}
+	
+	return true;
+}
+
 template <typename T>
 std::vector<T> read_lines_as(const std::string& input_file)
 {
-	const std::string input_path = std::string(_SOLUTIONDIR) + "inputs\\" + input_file;
-	std::ifstream infile(input_path);
+	std::ifstream infile = open_input_file(input_file);
 
 	std::vector<T> results;
 
