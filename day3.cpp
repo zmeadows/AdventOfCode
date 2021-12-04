@@ -14,4 +14,5 @@ void day3()
 		out("3.2) {}\n", 0);
 	} // end part two
 
+	out("\n");
 }

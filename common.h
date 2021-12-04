@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cassert>
 #include <cstdint>
 #include <cstdio>
 #include <format>
@@ -12,6 +13,7 @@
 #include <unordered_set>
 
 #define FOR(X,Y) for (size_t X = 0; X < Y; X++)
+#define FORS(X,S,Y) for (size_t X = S; X < Y; X++)
 #define FORN(X,Y,N) for (size_t X = 0; X < Y; X += N)
 
 using I = int64_t;
@@ -54,5 +56,9 @@ T sum(const std::vector<T>& vec, size_t start, size_t end) {
 		res += vec[i];
 	}
 	return res;
+}
+
+__forceinline I toint(const std::string& str) {
+	return std::stoll(str);
 }
 

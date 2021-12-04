@@ -6,7 +6,7 @@ void day1()
 
 	{ // start part one
 		I X = 0;
-		FOR(Q, in.size())
+		FORS(Q, 1, in.size())
 			X += in[Q] > in[Q - 1];
 		out("1.1) {}\n", X);
 	} // end part one
@@ -14,7 +14,7 @@ void day1()
 	{ // start part two
 		I X = 0;
 		I last = sum(in, 0, 2);
-		for (size_t idx = 3; idx < in.size(); idx++) {
+		FORS(idx, 3, in.size()) {
 			I next = sum(in, idx - 2, idx);
 			X += next > last;
 			last = next;
@@ -22,5 +22,7 @@ void day1()
 
 		out("1.2) {}\n", X);
 	} // end part two
+
+	out("\n");
 }
 

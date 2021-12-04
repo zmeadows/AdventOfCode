@@ -10,12 +10,11 @@ void day2()
 
 		FORN(idx, in.size() - 1, 2) {
 			S& Q = in[idx];
-			I X = std::stoll(in[idx + 1]);
+			I X = toint(in[idx + 1]);
 
 			if (Q == "forward") pos += X;
 			else if (Q == "up") dep -= X;
 			else if (Q == "down") dep += X;
-			else throw;
 		}
 
 		out("2.1) {}\n", dep * pos);
@@ -28,7 +27,7 @@ void day2()
 
 		FORN(idx, in.size() - 1, 2) {
 			S& Q = in[idx];
-			I X = std::stoll(in[idx + 1]);
+			I X = toint(in[idx + 1]);
 
 			if (Q == "forward") {
 				pos += X;
@@ -36,9 +35,10 @@ void day2()
 			}
 			else if (Q == "up") aim -= X;
 			else if (Q == "down") aim += X;
-			else throw;
 		}
 
 		out("2.2) {}\n", dep * pos);
 	} // end part two
+
+	out("\n");
 }

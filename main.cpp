@@ -13,7 +13,5 @@ int main()
     day2();
     day3();
 
-    std::cout << std::endl;
-
     return 0;
 }
