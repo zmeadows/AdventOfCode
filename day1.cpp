@@ -2,27 +2,28 @@
 
 void day1()
 {
-	auto in = readfile<I>("1a.txt");
+	const auto depths = read_lines_as<S64>("1a.txt");
 
 	{ // start part one
-		I X = 0;
-		FORS(Q, 1, in.size())
-			X += in[Q] > in[Q - 1];
-		out("1.1) {}\n", X);
+		S64 X = 0;
+		for (size_t idx = 1; idx < depths.size(); idx++) {
+			X += depths[idx] > depths[idx - 1];
+		}
+		print("1.1) {}\n", X);
 	} // end part one
 
 	{ // start part two
-		I X = 0;
-		I last = sum(in, 0, 2);
-		FORS(idx, 3, in.size()) {
-			I next = sum(in, idx - 2, idx);
+		S64 X = 0;
+		S64 last = depths[0] + depths[1] + depths[2];
+		for (size_t idx = 3; idx < depths.size(); idx++) {
+			S64 next = depths[idx - 2] + depths[idx - 1] + depths[idx];
 			X += next > last;
 			last = next;
 		}
 
-		out("1.2) {}\n", X);
+		print("1.2) {}\n", X);
 	} // end part two
 
-	out("\n");
+	print("\n");
 }
 

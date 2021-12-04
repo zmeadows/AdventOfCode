@@ -2,43 +2,53 @@
 
 void day2()
 {
-	auto in = readfile<S>("2a.txt");
+	const auto instructions = read_lines_as<std::string>("2a.txt");
 
 	{ // start part one
-		I pos = 0;
-		I dep = 0;
+		S64 position = 0;
+		S64 depth = 0;
 
-		FORN(idx, in.size() - 1, 2) {
-			S& Q = in[idx];
-			I X = toint(in[idx + 1]);
+		for (size_t idx = 0; idx < instructions.size() - 1; idx += 2) {
+			const std::string& command = instructions[idx];
+			S64 X = std::stoll(instructions[idx + 1]);
 
-			if (Q == "forward") pos += X;
-			else if (Q == "up") dep -= X;
-			else if (Q == "down") dep += X;
+			if (command == "forward") {
+				position += X;
+			}
+			else if (command == "up") {
+				depth -= X;
+			}
+			else if (command == "down") {
+				depth += X;
+			}
 		}
 
-		out("2.1) {}\n", dep * pos);
+		print("2.1) {}\n", depth * position);
 	} // end part one
 
 	{ // start part two
-		I aim = 0;
-		I pos = 0;
-		I dep = 0;
+		S64 aim = 0;
+		S64 position = 0;
+		S64 depth = 0;
 
-		FORN(idx, in.size() - 1, 2) {
-			S& Q = in[idx];
-			I X = toint(in[idx + 1]);
+		for (size_t idx = 0; idx < instructions.size(); idx += 2) {
+			const std::string& command = instructions[idx];
+			S64 X = std::stoll(instructions[idx + 1]);
 
-			if (Q == "forward") {
-				pos += X;
-				dep += aim * X;
+			if (command == "forward") {
+				position += X;
+				depth += aim * X;
 			}
-			else if (Q == "up") aim -= X;
-			else if (Q == "down") aim += X;
+			else if (command == "up") {
+				aim -= X;
+			}
+			else if (command == "down") {
+				aim += X;
+			}
 		}
 
-		out("2.2) {}\n", dep * pos);
+		print("2.2) {}\n", depth * position);
 	} // end part two
 
-	out("\n");
+	print("\n");
 }
