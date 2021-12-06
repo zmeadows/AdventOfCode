@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <array>
 #include <cassert>
 #include <cstdint>
@@ -9,12 +10,16 @@
 #include <ios>
 #include <iostream>
 #include <map>
+#include <numeric>
 #include <optional>
 #include <sstream>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <utility>
+
+#include "bignum/wideint.h"
+using U256 = wideint<256>;
 
 using U64 = uint64_t;
 using U32 = uint32_t;

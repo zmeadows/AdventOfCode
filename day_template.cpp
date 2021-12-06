@@ -2,7 +2,7 @@
 
 void dayN()
 {
-	// const auto depths = read_lines_as<S64>("1a.txt");
+	// const auto depths = read_lines_as<std::string>("Na.txt");
 
 	{ // start part one
 		print("N.1) {}\n", 0);
