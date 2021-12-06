@@ -45,6 +45,9 @@
     <ClCompile Include="bignum\bignum.cc">
       <Filter>Source Files\bignum</Filter>
     </ClCompile>
+    <ClCompile Include="day7.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">

@@ -2,7 +2,7 @@
 
 static U64 fish_population(std::array<U64, 9> timers, U64 ndays)
 {
-	for (U64 day = 0; day < ndays; day++) {
+	while (ndays > 0) {
 		const U64 birth_count = timers[0];
 		timers[0] = 0;
 
@@ -11,6 +11,8 @@ static U64 fish_population(std::array<U64, 9> timers, U64 ndays)
 
 		timers[8] = birth_count;
 		timers[6] += birth_count;
+
+		ndays--;
 	}
 
 	return std::accumulate(timers.begin(), timers.end(), 0ULL);
