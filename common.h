@@ -8,6 +8,7 @@
 #include <fstream>
 #include <ios>
 #include <iostream>
+#include <map>
 #include <optional>
 #include <sstream>
 #include <string>
@@ -178,3 +179,43 @@ __forceinline constexpr bool check_bit(U64 num, U64 idx)
 {
 	return ((num >> idx) & U64(1)) > 0;
 }
+
+template <typename T>
+struct V2 {
+	T x = {};
+	T y = {};
+
+	V2(const std::string& coords) {
+		const auto s = split<S64>(coords, ',');
+		assert(s.size() == 2);
+		this->x = s[0];
+		this->y = s[1];
+	}
+
+	V2(T _x, T _y) : x(_x), y(_y) {}
+
+	bool operator==(const V2<T>&) const = default;
+
+	__forceinline V2<T>& operator+=(const V2<T>& rhs) {
+		this->x += rhs.x;
+		this->y += rhs.y;
+		return *this;
+	}
+};
+
+// The specialized hash function for `unordered_map` keys
+struct v2_hash_fn
+{
+	template <class T>
+	std::size_t operator() (const V2<T>& vec) const
+	{
+		const std::size_t h1 = std::hash<T>()(vec.x);
+		const std::size_t h2 = std::hash<T>()(vec.y);
+
+		return h1 ^ h2;
+	}
+};
+
+
+
+
