@@ -1,6 +1,5 @@
 #include "common.h"
 
-
 struct Vent {
 	V2<S64> from;
 	V2<S64> to;
