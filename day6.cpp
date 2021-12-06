@@ -1,6 +1,6 @@
 #include "common.h"
 
-void dayN()
+void day6()
 {
 	// const auto input = read_lines_as<S64>("6a.txt");
 

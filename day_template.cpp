@@ -1,6 +1,6 @@
 #include "common.h"
 
-void day6()
+void dayN()
 {
 	// const auto depths = read_lines_as<S64>("1a.txt");
 
