@@ -5,6 +5,7 @@ extern void day2();
 extern void day3();
 extern void day4();
 extern void day5();
+extern void day6();
 
 int main()
 {
@@ -15,7 +16,8 @@ int main()
     // day2();
     // day3();
     // day4();
-    day5();
+    // day5();
+    day6();
 
     return 0;
 }
