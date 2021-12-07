@@ -9,6 +9,7 @@
 #include <fstream>
 #include <ios>
 #include <iostream>
+#include <limits>
 #include <map>
 #include <numeric>
 #include <optional>
@@ -47,7 +48,6 @@ static_assert(sizeof(F32) == 4);
 template <typename T, size_t M, size_t N>
 using Grid = std::array<std::array<T, N>, M>;
 
-
 __forceinline std::ifstream open_input_file(const std::string& input_file)
 {
 	const std::string full_input_path = std::string(_SOLUTIONDIR) + "inputs\\" + input_file;
@@ -73,7 +73,7 @@ std::vector<T> split(const std::string& input, char delim)
 }
 
 template <size_t N, size_t M>
-__forceinline bool parse_grid(std::ifstream& input, Grid<S64, M, N>& grid, char delim = ' ')
+bool parse_grid(std::ifstream& input, Grid<S64, M, N>& grid, char delim = ' ')
 {
 	std::string row_string;
 
@@ -157,13 +157,13 @@ __forceinline std::pair<std::vector<U64>, U64> read_binary_numbers_from_file(con
 }
 
 template <typename FmtType, class... Args>
-__forceinline void print(const FmtType& fmt, Args&& ...args)
+void print(const FmtType& fmt, Args&& ...args)
 {
 	std::cout << std::format(fmt, std::forward<Args>(args)...);
 }
 
 template <typename T, typename Callable>
-__forceinline void filter(std::vector<T>& vec, Callable&& f)
+void filter(std::vector<T>& vec, Callable&& f)
 {
 	vec.erase(std::remove_if(vec.begin(), vec.end(), f), vec.end());
 }
@@ -221,6 +221,9 @@ struct v2_hash_fn
 	}
 };
 
-
-
-
+__forceinline S64 average(const std::vector<S64>& vec)
+{
+	const double sum = static_cast<double>(std::reduce(vec.begin(), vec.end()));
+	const double entries = static_cast<double>(vec.size());
+	return static_cast<S64>(round(sum / entries));
+}

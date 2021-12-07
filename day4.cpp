@@ -26,7 +26,7 @@ static __forceinline bool check_col(
 	return true;
 }
 
-static bool check_board(const Board& board, const std::unordered_set<S64>& calls)
+static __forceinline bool check_board(const Board& board, const std::unordered_set<S64>& calls)
 {
 	for (size_t row_idx = 0; row_idx < 5; row_idx++) {
 		if (check_row(board, calls, row_idx)) {

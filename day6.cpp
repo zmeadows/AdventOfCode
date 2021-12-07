@@ -20,10 +20,10 @@ static U64 fish_population(std::array<U64, 9> timers, U64 ndays)
 
 void day6()
 {
-	const std::vector<std::string> input = read_lines_as<std::string>("6a.txt");
+	const std::string input = read_lines_as<std::string>("6a.txt")[0];
 
 	std::array<U64, 9> initial_timers = { 0 };
-	for (const U64 t : split<U64>(input[0], ','))
+	for (const U64 t : split<U64>(input, ','))
 		initial_timers[t]++;
 
 	print("6.1) {}\n", fish_population(initial_timers, 80));
