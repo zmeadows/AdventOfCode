@@ -15,14 +15,13 @@ void day7()
 		// of the global minimum. So we just pick the right direction and move.
 		const S64 delta = fuel_cost_fn(mean_pos + 1) < fuel_cost_fn(mean_pos) ? 1 : -1;
 		const S64 bound = (delta > 0 ? max_pos : min_pos) + delta;
-		S64 last_fuel_cost = std::numeric_limits<S64>::max();
 
+		S64 last_fuel_cost = std::numeric_limits<S64>::max();
 		for (S64 align = mean_pos; align != bound; align += delta) {
 			const S64 align_cost = fuel_cost_fn(align);
 			if (align_cost > last_fuel_cost) break;
 			last_fuel_cost = align_cost;
 		}
-
 		return last_fuel_cost;
 	};
 

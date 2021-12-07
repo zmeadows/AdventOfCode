@@ -223,6 +223,7 @@ struct v2_hash_fn
 
 __forceinline S64 average(const std::vector<S64>& vec)
 {
+	assert(!vec.empty());
 	const double sum = static_cast<double>(std::reduce(vec.begin(), vec.end()));
 	const double entries = static_cast<double>(vec.size());
 	return static_cast<S64>(round(sum / entries));
