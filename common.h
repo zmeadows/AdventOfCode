@@ -54,8 +54,8 @@ __forceinline std::ifstream open_input_file(const std::string& input_file)
 	return std::ifstream(full_input_path);
 }
 
-template <typename T>
-std::vector<T> split(const std::string& input, char delim)
+template <typename T = std::string>
+std::vector<T> split(const std::string& input, char delim = ' ')
 {
 	std::stringstream ss(input);
 
@@ -64,7 +64,7 @@ std::vector<T> split(const std::string& input, char delim)
 	T val = {};
 	while (ss >> val) {
 		result.push_back(val);
-		if (ss.peek() == delim) {
+		while (ss.peek() == delim) {
 			ss.ignore();
 		}
 	}
@@ -140,6 +140,20 @@ std::vector<T> read_lines_as(const std::string& input_file)
 	return results;
 }
 
+__forceinline std::vector<std::string> read_lines(const std::string& input_file)
+{
+	std::ifstream infile = open_input_file(input_file);
+
+	std::vector<std::string> results;
+
+	std::string line;
+	while (std::getline(infile, line)) {
+		results.push_back(line);
+	}
+
+	return results;
+}
+
 __forceinline std::pair<std::vector<U64>, U64> read_binary_numbers_from_file(const std::string& input_file)
 {
 	const std::string input_path = std::string(_SOLUTIONDIR) + "inputs\\" + input_file;
@@ -162,10 +176,10 @@ void print(const FmtType& fmt, Args&& ...args)
 	std::cout << std::format(fmt, std::forward<Args>(args)...);
 }
 
-template <typename T, typename Callable>
-void filter(std::vector<T>& vec, Callable&& f)
+template <typename T, typename PredicateFn>
+void filter(std::vector<T>& vec, PredicateFn&& fn)
 {
-	vec.erase(std::remove_if(vec.begin(), vec.end(), f), vec.end());
+	vec.erase(std::remove_if(vec.begin(), vec.end(), fn), vec.end());
 }
 
 __forceinline constexpr U64 set_bit(U64 num, U64 idx)
@@ -227,4 +241,24 @@ __forceinline S64 average(const std::vector<S64>& vec)
 	const double sum = static_cast<double>(std::reduce(vec.begin(), vec.end()));
 	const double entries = static_cast<double>(vec.size());
 	return static_cast<S64>(round(sum / entries));
+}
+
+template <typename Container>
+void intersect(const Container& in1, const Container& in2, Container& out)
+{
+	out.clear();
+	std::set_intersection(
+		in1.begin(), in1.end(),
+		in2.begin(), in2.end(),
+		std::back_inserter(out));
+}
+
+template <typename Container>
+void combine(const Container& in1, const Container& in2, Container& out)
+{
+	out.clear();
+	std::set_union(
+		in1.begin(), in1.end(),
+		in2.begin(), in2.end(),
+		std::back_inserter(out));
 }

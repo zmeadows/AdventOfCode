@@ -173,6 +173,7 @@
     <ClCompile Include="day6.cpp" />
     <ClCompile Include="day7.cpp" />
     <ClCompile Include="day8.cpp" />
+    <ClCompile Include="day9.cpp" />
     <ClCompile Include="day_template.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="day1.cpp" />

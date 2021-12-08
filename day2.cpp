@@ -4,11 +4,7 @@ void day2()
 {
 	const auto instructions = read_lines_as<std::string>("2a.txt");
 
-	S64 position = 0;
-	S64 depth = 0;
-	S64 aim2 = 0;
-	S64 position2 = 0;
-	S64 depth2 = 0;
+	S64 position = 0, depth = 0, aim2 = 0, position2 = 0, depth2 = 0;
 
 	for (size_t idx = 0; idx < instructions.size() - 1; idx += 2) {
 		const std::string& command = instructions[idx];

@@ -69,15 +69,12 @@ void day4()
 	std::getline(input, call_order_string);
 	const std::vector<S64> call_order = split<S64>(call_order_string, ',');
 
-	std::vector<Board> boards;
-	boards.reserve(256);
+	std::vector<Board> boards; boards.reserve(256);
 
 	Board b;
 	while (parse_grid(input, b)) {
 		boards.push_back(b);
 	}
-
-	assert(!boards.empty());
 
 	{ // start part one
 		std::optional<size_t> winning_board_idx;
