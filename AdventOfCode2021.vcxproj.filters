@@ -21,37 +21,37 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="day1.cpp">
+    <ClCompile Include="day01.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="day2.cpp">
+    <ClCompile Include="day02.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="day3.cpp">
+    <ClCompile Include="day03.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="day4.cpp">
+    <ClCompile Include="day04.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="day_template.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="day5.cpp">
+    <ClCompile Include="day05.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="day6.cpp">
+    <ClCompile Include="day06.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="bignum\bignum.cc">
       <Filter>Source Files\bignum</Filter>
     </ClCompile>
-    <ClCompile Include="day7.cpp">
+    <ClCompile Include="day07.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="day8.cpp">
+    <ClCompile Include="day08.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="day9.cpp">
+    <ClCompile Include="day09.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="day10.cpp">
