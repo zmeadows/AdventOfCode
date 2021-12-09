@@ -14,7 +14,6 @@ static U64 decode(const Entry& entry)
 	);
 
 	std::unordered_map<U64, std::string> segment_matches;
-	segment_matches.reserve(10);
 
 	for (const std::string& pattern : entry.patterns) {
 		if (auto it = UNIQUE_DIGITS.find(pattern.size()); it != UNIQUE_DIGITS.end()) {
@@ -47,7 +46,6 @@ static U64 decode(const Entry& entry)
 	decode_digit(3, 5, intersect<std::string>, 6, 4);
 
 	std::unordered_map<std::string, U64> decoded_segments;
-	decoded_segments.reserve(10);
 	for (const auto& [k, v] : segment_matches)
 		decoded_segments.emplace(v, k);
 

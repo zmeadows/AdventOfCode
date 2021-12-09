@@ -13,6 +13,8 @@
 #include <map>
 #include <numeric>
 #include <optional>
+#include <queue>
+#include <set>
 #include <sstream>
 #include <string>
 #include <unordered_map>
@@ -261,4 +263,11 @@ void combine(const Container& in1, const Container& in2, Container& out)
 		in1.begin(), in1.end(),
 		in2.begin(), in2.end(),
 		std::back_inserter(out));
+}
+
+template <typename T>
+T clamp(T val, T low, T high) {
+	if (val < low) return low;
+	else if (val > high) return high;
+	else return val;
 }
