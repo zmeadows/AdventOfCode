@@ -46,7 +46,7 @@ static void climb_basin(std::vector<std::vector<S64>>& heights, S64 init_row, S6
 		queue_above_below(irow, icol);
 
 		// Perform east/west span filling for better CPU cache access patterns and smaller queue size.
-	    // With this method the maximum queue size is around 20, for this problem.
+		// With this method the maximum queue size is around 20, for this problem.
 		scan_row(irow, icol, 1);
 		scan_row(irow, icol, -1);
 	}
@@ -108,8 +108,8 @@ export struct Day9 {
 		}
 
 		return {
-		    risk_level_sum,
-		    std::accumulate(basins.begin(), basins.end(), 1LL, std::multiplies<S64>())
+			risk_level_sum,
+			std::accumulate(basins.begin(), basins.end(), 1LL, std::multiplies<S64>())
 		};
 	}
 };

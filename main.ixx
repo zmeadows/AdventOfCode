@@ -34,11 +34,11 @@ int main()
     std::cin.tie(NULL);
 
 	switch (mode) {
-	    case Mode::BenchmarkLatest: {
+		case Mode::BenchmarkLatest: {
 			bench<LastDay>();
-	    	break;
-	    }
-	    case Mode::BenchmarkAll: {
+			break;
+		}
+		case Mode::BenchmarkAll: {
 			bench<Day1>();
 			bench<Day2>();
 			bench<Day3>();
@@ -49,14 +49,14 @@ int main()
 			bench<Day8>();
 			bench<Day9>();
 			bench<Day10>();
-	    	break;
-	    }
-	    case Mode::TestLatest: {
+			break;
+		}
+		case Mode::TestLatest: {
 			test<LastDay>();
-	    	break;
+			break;
 
-	    }
-	    case Mode::TestAll: {
+		}
+		case Mode::TestAll: {
 			test<Day1>();
 			test<Day2>();
 			test<Day3>();
@@ -67,8 +67,8 @@ int main()
 			test<Day8>();
 			test<Day9>();
 			test<Day10>();
-	    	break;
-	    }
+			break;
+		}
 	}
 
 	return EXIT_SUCCESS;
