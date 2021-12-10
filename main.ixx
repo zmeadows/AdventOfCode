@@ -24,9 +24,9 @@ enum class Mode {
 };
 
 //constexpr Mode mode = Mode::BenchmarkLatest;
-//constexpr Mode mode = Mode::TestLatest;
+constexpr Mode mode = Mode::TestLatest;
 //constexpr Mode mode = Mode::BenchmarkAll;
-constexpr Mode mode = Mode::TestAll;
+//constexpr Mode mode = Mode::TestAll;
 
 int main()
 {
