@@ -1,4 +1,6 @@
+module;
 #include "common.h"
+export module day03;
 
 static __forceinline S64 bit_balance(const std::vector<U64>& numbers, size_t idx) {
 	S64 balance = 0;
@@ -23,7 +25,7 @@ static U64 find_rating(const std::vector<U64>& report, Rating type, U64 max_bits
 		const bool bit_pref =
 			type == Rating::OxygenGenerator ? balance >= 0 : balance < 0;
 
-		filter(buffer, [&](U64 n) -> bool {
+		std::erase_if(buffer, [&](U64 n) -> bool {
 			return check_bit(n, idx) == bit_pref;
 		});
 
@@ -34,12 +36,20 @@ static U64 find_rating(const std::vector<U64>& report, Rating type, U64 max_bits
 	return buffer[0];
 }
 
-void day3()
-{
-	const auto [report, max_bits] = read_binary_numbers_from_file("3a.txt");
-	assert(report.size() > 0);
+export struct Day3 {
+	static constexpr U64 DAY_NUMBER = 3;
+	static constexpr std::pair<U64, U64> SOLUTION = { 2261546, 6775520 };
+	using InputType = std::pair<std::vector<U64>, U64>;
 
-	{ // start part one
+	static InputType prepare_input() {
+		return read_binary_numbers_from_file("3a.txt");
+	}
+
+	static std::pair<U64, U64> solve(const InputType& input)
+	{
+		const auto& [report, max_bits] = input;
+		std::pair<U64, U64> answer = {};
+
 		U64 gamma = 0, epsilon = 0;
 
 		for (size_t idx = 0; idx < max_bits; idx++) {
@@ -55,15 +65,13 @@ void day3()
 
 		epsilon = ~gamma & ((1ULL << max_bits) - 1ULL);
 
-		print("3.1) {}\n", gamma * epsilon);
-	} // end part one
+		answer.first = gamma * epsilon;
 
-	{ // start part two
 		const U64 oxygen_rating = find_rating(report, Rating::OxygenGenerator, max_bits);
 		const U64 scrubber_rating = find_rating(report, Rating::CO2Scrubber, max_bits);
 
-		print("3.2) {}\n", oxygen_rating * scrubber_rating);
-	} // end part two
+		answer.second = oxygen_rating * scrubber_rating;
 
-	print("\n");
-}
+		return answer;
+	}
+};

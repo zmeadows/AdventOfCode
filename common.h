@@ -178,12 +178,6 @@ void print(const FmtType& fmt, Args&& ...args)
 	std::cout << std::format(fmt, std::forward<Args>(args)...);
 }
 
-template <typename T, typename PredicateFn>
-void filter(std::vector<T>& vec, PredicateFn&& fn)
-{
-	vec.erase(std::remove_if(vec.begin(), vec.end(), fn), vec.end());
-}
-
 __forceinline constexpr U64 set_bit(U64 num, U64 idx)
 {
 	return num | (U64(1) << idx);
@@ -270,4 +264,13 @@ T clamp(T val, T low, T high) {
 	if (val < low) return low;
 	else if (val > high) return high;
 	else return val;
+}
+
+template <typename Problem>
+void test() {
+	const auto answer = Problem::solve(Problem::prepare_input());
+	const bool success = answer == Problem::SOLUTION;
+	const std::string result = success ? "SUCCESS" : "FAILURE";
+	print("Day {:<2} => [ {:^15} , {:^17} ] {:>8}!\n",
+		  Problem::DAY_NUMBER, answer.first, answer.second, result);
 }

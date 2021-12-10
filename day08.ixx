@@ -1,4 +1,6 @@
+module;
 #include "common.h"
+export module day08;
 
 struct Entry {
 	std::vector<std::string> patterns;
@@ -56,43 +58,57 @@ static U64 decode(const Entry& entry)
 	return answer;
 }
 
-void day8()
-{
-	auto input = read_lines("8a.txt");
+export struct Day8 {
+	static constexpr U64 DAY_NUMBER = 8;
+	static constexpr std::pair<U64, U64> SOLUTION = { 476, 1011823 };
 
-	std::vector<Entry> entries; entries.reserve(input.size());
-	for (const std::string& line : input) {
-		Entry entry;
+	using InputType = std::vector<Entry>;
+	static InputType prepare_input()
+	{
+		auto lines = read_lines("8a.txt");
 
-		bool hit_delimiter = false;
-		for (std::string& word : split(line)) {
-			if (word == "|") {
-				hit_delimiter = true;
-				continue;
+		std::vector<Entry> entries;
+		entries.reserve(lines.size());
+
+		for (const std::string& line : lines) {
+			Entry entry;
+
+			bool hit_delimiter = false;
+			for (std::string& word : split(line)) {
+				if (word == "|") {
+					hit_delimiter = true;
+					continue;
+				}
+
+				std::sort(word.begin(), word.end());
+				if (hit_delimiter)
+					entry.output.emplace_back(std::move(word));
+				else
+					entry.patterns.emplace_back(std::move(word));
 			}
 
-			std::sort(word.begin(), word.end());
-			if (hit_delimiter)
-				entry.output.emplace_back(std::move(word));
-			else
-				entry.patterns.emplace_back(std::move(word));
+			entries.emplace_back(std::move(entry));
 		}
 
-		entries.emplace_back(std::move(entry));
+		return entries;
 	}
 
-	U64 unique_output_count = 0;
-	for (const Entry& entry : entries) {
-		for (const std::string& pattern : entry.output) {
-			if (auto it = UNIQUE_DIGITS.find(pattern.size()); it != UNIQUE_DIGITS.end()) {
-				unique_output_count++;
+	static std::pair<U64, U64> solve(const InputType& entries)
+	{
+		std::pair<U64, U64> answer = { 0,0 };
+
+		for (const Entry& entry : entries) {
+			for (const std::string& pattern : entry.output) {
+				if (auto it = UNIQUE_DIGITS.find(pattern.size()); it != UNIQUE_DIGITS.end()) {
+					answer.first++;
+				}
 			}
 		}
-	}
-	print("8.1) {}\n", unique_output_count);
 
-	U64 output_sum = 0;
-	for (const Entry& entry : entries)
-		output_sum += decode(entry);
-	print("8.2) {}\n\n", output_sum);
-}
+		for (const Entry& entry : entries)
+			answer.second += decode(entry);
+
+		return answer;
+	}
+};
+

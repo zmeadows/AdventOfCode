@@ -44,7 +44,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <EnableASAN>true</EnableASAN>
+    <EnableASAN>false</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -78,7 +78,7 @@
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>false</LinkIncremental>
+    <LinkIncremental>true</LinkIncremental>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
   </PropertyGroup>
@@ -165,19 +165,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="benchmark.ixx" />
     <ClCompile Include="bignum\bignum.cc" />
-    <ClCompile Include="day10.cpp" />
-    <ClCompile Include="day02.cpp" />
-    <ClCompile Include="day03.cpp" />
-    <ClCompile Include="day04.cpp" />
-    <ClCompile Include="day05.cpp" />
-    <ClCompile Include="day06.cpp" />
-    <ClCompile Include="day07.cpp" />
-    <ClCompile Include="day08.cpp" />
-    <ClCompile Include="day09.cpp" />
-    <ClCompile Include="day_template.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="day01.cpp" />
+    <ClCompile Include="day10.ixx" />
+    <ClCompile Include="day02.ixx" />
+    <ClCompile Include="day03.ixx" />
+    <ClCompile Include="day04.ixx" />
+    <ClCompile Include="day05.ixx" />
+    <ClCompile Include="day06.ixx" />
+    <ClCompile Include="day07.ixx" />
+    <ClCompile Include="day08.ixx" />
+    <ClCompile Include="day09.ixx" />
+    <ClCompile Include="day_template.ixx" />
+    <ClCompile Include="main.ixx" />
+    <ClCompile Include="day01.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bignum\bignum.h" />

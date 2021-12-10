@@ -18,43 +18,46 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="main.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="day01.cpp">
+    <ClCompile Include="day01.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="day02.cpp">
+    <ClCompile Include="day02.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="day03.cpp">
+    <ClCompile Include="day03.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="day04.cpp">
+    <ClCompile Include="day04.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="day_template.cpp">
+    <ClCompile Include="day_template.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="day05.cpp">
+    <ClCompile Include="day05.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="day06.cpp">
+    <ClCompile Include="day06.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="bignum\bignum.cc">
       <Filter>Source Files\bignum</Filter>
     </ClCompile>
-    <ClCompile Include="day07.cpp">
+    <ClCompile Include="day07.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="day08.cpp">
+    <ClCompile Include="day08.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="day09.cpp">
+    <ClCompile Include="day09.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="day10.cpp">
+    <ClCompile Include="day10.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="benchmark.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

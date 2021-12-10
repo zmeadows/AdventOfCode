@@ -1,4 +1,6 @@
+module;
 #include "common.h"
+export module day09;
 
 static void climb_basin(std::vector<std::vector<S64>>& heights, S64 init_row, S64 init_col, S64& size)
 {
@@ -57,41 +59,58 @@ static __forceinline S64 compute_basin_size(std::vector<std::vector<S64>>& heigh
 	return size;
 }
 
-void day9()
-{
-	std::vector<std::vector<S64>> heights;
-	for (const std::string& rowstr : read_lines("9a.txt")) {
-		std::vector<S64> row; row.reserve(rowstr.size());
-		for (char c : rowstr)
-			row.push_back(static_cast<S64>(c - '0'));
-		heights.emplace_back(std::move(row));
+export struct Day9 {
+	static constexpr U64 DAY_NUMBER = 9;
+	static constexpr std::pair<U64, U64> SOLUTION = { 439, 900900 };
+	using InputType = std::vector<std::vector<S64>>;
+
+	static InputType prepare_input()
+	{
+		std::vector<std::vector<S64>> heights;
+
+		for (const std::string& rowstr : read_lines("9a.txt")) {
+			std::vector<S64> row; row.reserve(rowstr.size());
+			for (char c : rowstr)
+				row.push_back(static_cast<S64>(c - '0'));
+			heights.emplace_back(std::move(row));
+		}
+
+		return heights;
 	}
 
-	const S64 ROW_COUNT = heights.size();
-	const S64 COL_COUNT = heights[0].size();
+	static std::pair<U64, U64> solve(const InputType& heights_original)
+	{
+		InputType heights(heights_original);
 
-	S64 risk_level_sum = 0;
+		const S64 ROW_COUNT = heights.size();
+		const S64 COL_COUNT = heights[0].size();
 
-	std::set<S64> basins;
-	for (S64 irow = 0; irow < ROW_COUNT; irow++) {
-		for (S64 icol = 0; icol < COL_COUNT; icol++) {
-			const S64 h = heights[irow][icol];
+		S64 risk_level_sum = 0;
 
-			const bool is_low_point =
-				   (irow == ROW_COUNT - 1 || h < heights[irow + 1][icol])
-				&& (irow == 0             || h < heights[irow - 1][icol])
-				&& (icol == COL_COUNT - 1 || h < heights[irow][icol + 1])
-				&& (icol == 0             || h < heights[irow][icol - 1]);
+		std::set<S64> basins;
+		for (S64 irow = 0; irow < ROW_COUNT; irow++) {
+			for (S64 icol = 0; icol < COL_COUNT; icol++) {
+				const S64 h = heights[irow][icol];
 
-			if (is_low_point) {
-				risk_level_sum += h + 1;
-				basins.insert(compute_basin_size(heights, irow, icol));
-				// Only keep the three largest basins at any given moment, to save memory.
-				if (basins.size() > 3) basins.erase(basins.begin());
+				const bool is_low_point =
+					(irow == ROW_COUNT - 1 || h < heights[irow + 1][icol])
+					&& (irow == 0 || h < heights[irow - 1][icol])
+					&& (icol == COL_COUNT - 1 || h < heights[irow][icol + 1])
+					&& (icol == 0 || h < heights[irow][icol - 1]);
+
+				if (is_low_point) {
+					risk_level_sum += h + 1;
+					basins.insert(compute_basin_size(heights, irow, icol));
+					// Only keep the three largest basins at any given moment, to save memory.
+					if (basins.size() > 3) basins.erase(basins.begin());
+				}
 			}
 		}
-	}
 
-	print("9.1) {}\n", risk_level_sum);
-	print("9.2) {}\n\n", std::accumulate(basins.begin(), basins.end(), 1LL, std::multiplies<S64>()));
-}
+		return {
+		    risk_level_sum,
+		    std::accumulate(basins.begin(), basins.end(), 1LL, std::multiplies<S64>())
+		};
+	}
+};
+
