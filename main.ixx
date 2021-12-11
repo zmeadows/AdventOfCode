@@ -13,8 +13,9 @@ import day07;
 import day08;
 import day09;
 import day10;
+import day11;
 
-using LastDay = Day10;
+using LastDay = Day11;
 
 enum class Mode {
     BenchmarkLatest,
@@ -49,6 +50,7 @@ int main()
 			bench<Day8>();
 			bench<Day9>();
 			bench<Day10>();
+			bench<Day11>();
 			break;
 		}
 		case Mode::TestLatest: {
@@ -67,6 +69,7 @@ int main()
 			test<Day8>();
 			test<Day9>();
 			test<Day10>();
+			test<Day11>();
 			break;
 		}
 	}

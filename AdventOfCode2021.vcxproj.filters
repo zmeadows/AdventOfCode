@@ -60,6 +60,9 @@
     <ClCompile Include="benchmark.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="day11.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
