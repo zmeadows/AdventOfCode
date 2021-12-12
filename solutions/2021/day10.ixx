@@ -1,6 +1,14 @@
-module;
-#include "common.h"
 export module day10;
+
+import types;
+import parse;
+
+import <algorithm>;
+import <compare>;
+import <string>;
+import <utility>;
+import <unordered_map>;
+import <vector>;
 
 export struct Day10 {
 	static constexpr U64 DAY_NUMBER = 10;
@@ -8,24 +16,29 @@ export struct Day10 {
 	using InputType = std::vector<std::string>;
 
 	static InputType prepare_input() {
-		return read_lines("10a.txt");
+		return read_lines("2021/10a.txt");
 	}
 
 	static std::pair<U64, U64> solve(const InputType& input_lines)
 	{
 		std::pair<U64, U64> answer = { 0,0 };
 
+		char closers[128];
+		closers['('] = ')';
+		closers['['] = ']';
+		closers['{'] = '}';
+		closers['<'] = '>';
+
 		const std::unordered_map<char, U64> CORRUPTED_CHAR_SCORE = {
 			{')', 3}, {']', 57}, {'}', 1197}, {'>', 25137}
 		};
 
 		const std::unordered_map<char, U64> INCOMPLETE_CHAR_SCORE = {
-			{'(', 1}, {'[', 2}, {'{', 3}, {'<', 4}
+			{')', 1}, {']', 2}, {'}', 3}, {'>', 4}
 		};
 
 		auto is_opener = [](const char ch) -> bool {
-			constexpr std::string_view OPENERS = "{[(<";
-			return OPENERS.find(ch) != OPENERS.npos;
+			return ch == '(' || ch == '[' || ch == '{' || ch == '<';
 		};
 
 		auto parens_match = [](char opener, char closer) -> bool {
@@ -35,17 +48,17 @@ export struct Day10 {
 				|| (opener == '<' && closer == '>');
 		};
 
-		std::vector<U64> scores = {};
-		std::stack<char> paren_history = {};
+		std::vector<U64> scores; scores.reserve(256);
+		std::string paren_history; paren_history.reserve(256);
 
 		for (const std::string& line : input_lines) {
 			bool corrupted = false;
 
-			for (char next_paren : line) {
+			for (const auto& next_paren : line) {
 				if (is_opener(next_paren)) {
-					paren_history.push(next_paren);
-				} else if (parens_match(paren_history.top(), next_paren)) {
-					paren_history.pop();
+					paren_history.push_back(closers[next_paren]);
+				} else if (next_paren == paren_history.back()) {
+					paren_history.pop_back();
 				} else {
 					answer.first += CORRUPTED_CHAR_SCORE.at(next_paren);
 					corrupted = true;
@@ -56,13 +69,13 @@ export struct Day10 {
 			if (!corrupted) {
 				U64 s = 0;
 				while (!paren_history.empty()) {
-					s = 5 * s + INCOMPLETE_CHAR_SCORE.at(paren_history.top());
-					paren_history.pop();
+					s = 5 * s + INCOMPLETE_CHAR_SCORE.at(paren_history.back());
+					paren_history.pop_back();
 				}
 				scores.push_back(s);
 			}
 
-			paren_history = {};
+			paren_history.clear();
 		}
 
 		std::sort(scores.begin(), scores.end());

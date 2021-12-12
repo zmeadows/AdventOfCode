@@ -1,6 +1,11 @@
-module;
-#include "common.h"
 export module day11;
+
+import types;
+import parse;
+
+import <array>;
+import <string>;
+import <utility>;
 
 export struct Day11 {
 	static constexpr U64 DAY_NUMBER = 11;
@@ -11,7 +16,7 @@ export struct Day11 {
 		InputType energy = {};
 
 		U64 irow = 0;
-		for (const std::string& rowstr : read_lines("11a.txt")) {
+		for (const std::string& rowstr : read_lines("2021/11a.txt")) {
 			std::array<U64, 10> row = {};
 			U64 icol = 0;
 			for (char c : rowstr) {
@@ -63,7 +68,7 @@ export struct Day11 {
 
 				for (U64 jrow = irow - 1; jrow <= irow + 1; jrow++) {
 					for (U64 jcol = icol - 1; jcol <= icol + 1; jcol++) {
-						if (++energy[jrow][jcol] == 10) {
+						if (++energy[jrow][jcol] == 10) [[unlikely]] {
 							flashing.push_back({ jrow, jcol });
 						}
 					}

@@ -1,8 +1,5 @@
-#include <iostream>
+export module main;
 
-#include "common.h"
-
-import benchmark;
 import day01;
 import day02;
 import day03;
@@ -15,6 +12,9 @@ import day09;
 import day10;
 import day11;
 
+import benchmark;
+import utils;
+
 using LastDay = Day11;
 
 enum class Mode {
@@ -25,18 +25,18 @@ enum class Mode {
 };
 
 //constexpr Mode mode = Mode::BenchmarkLatest;
-constexpr Mode mode = Mode::TestLatest;
-//constexpr Mode mode = Mode::BenchmarkAll;
+//constexpr Mode mode = Mode::TestLatest;
+constexpr Mode mode = Mode::BenchmarkAll;
 //constexpr Mode mode = Mode::TestAll;
 
-int main()
+export int main()
 {
-    std::ios::sync_with_stdio(false);
-    std::cin.tie(NULL);
+    //std::ios::sync_with_stdio(false);
+    //std::cin.tie(NULL);
 
 	switch (mode) {
 		case Mode::BenchmarkLatest: {
-			bench<LastDay>();
+			// bench<LastDay>();
 			break;
 		}
 		case Mode::BenchmarkAll: {
@@ -54,7 +54,7 @@ int main()
 			break;
 		}
 		case Mode::TestLatest: {
-			test<LastDay>();
+			// test<LastDay>();
 			break;
 
 		}
@@ -74,5 +74,5 @@ int main()
 		}
 	}
 
-	return EXIT_SUCCESS;
+	return 0;
 }

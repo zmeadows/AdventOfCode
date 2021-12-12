@@ -1,6 +1,12 @@
 module;
-#include "common.h"
+#include <cassert>
 export module day03;
+
+import types;
+import parse;
+import bitwise;
+
+import <vector>;
 
 static __forceinline S64 bit_balance(const std::vector<U64>& numbers, size_t idx) {
 	S64 balance = 0;
@@ -42,7 +48,7 @@ export struct Day3 {
 	using InputType = std::pair<std::vector<U64>, U64>;
 
 	static InputType prepare_input() {
-		return read_binary_numbers_from_file("3a.txt");
+		return read_binary_numbers_from_file("2021/3a.txt");
 	}
 
 	static std::pair<U64, U64> solve(const InputType& input)

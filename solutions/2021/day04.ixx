@@ -1,6 +1,12 @@
 module;
-#include "common.h"
+#include <fstream>
+#include <optional>
+#include <string>
+#include <unordered_set>
 export module day04;
+
+import types;
+import parse;
 
 using Board = Grid<S64, 5, 5>;
 
@@ -69,7 +75,7 @@ export struct Day4 {
 	using InputType = std::pair<std::vector<Board>, std::vector<S64>>;
 
 	static InputType prepare_input() {
-		std::ifstream input = open_input_file("4a.txt");
+		std::ifstream input = open_input_file("2021/4a.txt");
 
 		std::string call_order_string;
 		std::getline(input, call_order_string);

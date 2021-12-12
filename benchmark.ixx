@@ -1,11 +1,44 @@
-module;
-#include <chrono>
-#include <iostream>
-#include <iomanip>
-#include <math.h>
-export module benchmark;
+﻿export module benchmark;
+
+import <chrono>;
+import <cmath>;
+import <compare>;
+import <iomanip>;
+import <iostream>;
 
 using namespace std::chrono;
+
+// https://www.reddit.com/r/adventofcode/comments/rdrewg/2021_my_aim_is_for_all_of_this_years_solutions_to/
+
+/*
+D  PARSE      PART1      PART2
+1  7.27µs     790ns      470ns
+2  24.54µs    260ns      430ns
+3  43.50µs    32.67µs    12.82µs
+4  41.91µs    7.60µs     29.56µs
+5  12.19µs    728.45µs   991.74µs
+6  2.32µs     450ns      300ns
+7  11.01µs    160.50µs   380.60µs
+8  48.06µs    4.82µs     13.70µs
+9  25.00µs    48.76µs    118.10µs
+10 116.87µs   14.42µs -
+11 200ns      230.28µs -
+
+| Day             	| Mean time        	|
+|-----------------	|---------------	|
+| 1              	| 0.046 ms       	|
+| 2              	| 0.001 ms       	|
+| 3              	| 0.032 ms       	|
+| 4              	| 0.165 ms       	|
+| 5              	| 1.615 ms       	|
+| 6              	| 0.001 ms       	|
+| 7              	| 0.028 ms       	|
+| 8              	| 0.052 ms       	|
+| 9              	| 0.162 ms       	|
+| 10              	| 0.026 ms       	|
+| 11              	| 0.113 ms       	|
+https://github.com/MichalMarsalek/Advent-of-code/tree/master/2021/Nim
+*/
 
 export template <typename Problem>
 void bench()
@@ -19,7 +52,7 @@ void bench()
     double chunk_time = 0.0;
     double total_test_time = 0;
     double total_test_iterations = 0.0;
-    while (chunk_time < 0.1 && in_chunks_of < 1e12) {
+    while (chunk_time < 0.5 && in_chunks_of < 1e12) {
         in_chunks_of *= 2;
         const auto chunk_start_time = high_resolution_clock::now();
         for (size_t i = 0; i < in_chunks_of; i++) {
@@ -58,14 +91,10 @@ void bench()
             M2 += delta * delta2;
         }
 
-        const size_t total_iterations = (size_t)count * in_chunks_of;
+        // const size_t total_iterations = (size_t)count * in_chunks_of;
         // std::cout << '\r' << "iterations completed: " << std::setw(2) << std::setfill('0') << total_iterations << std::flush;
     } while (stddev() / std::abs(mean) > relative_precision && count < 1e7);
 
-    std::cout << std::endl;
-
-	std::cout << "solve time: " << mean << " +/- " << stddev() << " (seconds)" << std::endl;
-
-    std::cout << std::endl;
+	std::wcout << "Day " << Problem::DAY_NUMBER << " solve time : " << 1e6 * mean << "\u03BCs + / -" << stddev() << " (microseconds)" << std::endl;
 }
 

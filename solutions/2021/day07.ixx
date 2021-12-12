@@ -1,6 +1,13 @@
-module;
-#include "common.h"
 export module day07;
+
+import types;
+import parse;
+import utils;
+
+import <algorithm>;
+import <utility>;
+import <vector>;
+import <string>;
 
 export struct Day7 {
 	static constexpr U64 DAY_NUMBER = 7;
@@ -9,7 +16,7 @@ export struct Day7 {
 
 	static InputType prepare_input()
 	{
-		const std::string input = read_lines_as<std::string>("7a.txt")[0];
+		const std::string input = read_lines_as<std::string>("2021/7a.txt")[0];
 		return split<S64>(input, ',');
 	}
 

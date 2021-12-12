@@ -1,6 +1,13 @@
-module;
-#include "common.h"
 export module day09;
+
+import types;
+import parse;
+
+import <numeric>;
+import <set>;
+import <string>;
+import <utility>;
+import <vector>;
 
 static void climb_basin(std::vector<std::vector<S64>>& heights, S64 init_row, S64 init_col, S64& size)
 {
@@ -13,10 +20,10 @@ static void climb_basin(std::vector<std::vector<S64>>& heights, S64 init_row, S6
 
 	if (!on_map(init_row, init_col)) return;
 
-	std::queue<std::pair<S64, S64>> Q;
+	std::vector<std::pair<S64, S64>> Q; Q.reserve(128);
 
 	auto push_location = [&](const std::pair<S64, S64>& loc) {
-		Q.push(loc);
+		Q.push_back(loc);
 		heights[loc.first][loc.second] = 9;
 	};
 
@@ -40,7 +47,7 @@ static void climb_basin(std::vector<std::vector<S64>>& heights, S64 init_row, S6
 	push_location({ init_row, init_col });
 
 	while (!Q.empty()) {
-		const auto [irow, icol] = Q.front(); Q.pop();
+		const auto [irow, icol] = Q.back(); Q.pop_back();
 		size++;
 
 		queue_above_below(irow, icol);
@@ -68,7 +75,7 @@ export struct Day9 {
 	{
 		std::vector<std::vector<S64>> heights;
 
-		for (const std::string& rowstr : read_lines("9a.txt")) {
+		for (const std::string& rowstr : read_lines("2021/9a.txt")) {
 			std::vector<S64> row; row.reserve(rowstr.size());
 			for (char c : rowstr)
 				row.push_back(static_cast<S64>(c - '0'));
@@ -80,7 +87,8 @@ export struct Day9 {
 
 	static std::pair<U64, U64> solve(const InputType& heights_original)
 	{
-		InputType heights(heights_original);
+		static InputType heights;
+		heights = heights_original;
 
 		const S64 ROW_COUNT = heights.size();
 		const S64 COL_COUNT = heights[0].size();
@@ -98,7 +106,7 @@ export struct Day9 {
 					&& (icol == COL_COUNT - 1 || h < heights[irow][icol + 1])
 					&& (icol == 0 || h < heights[irow][icol - 1]);
 
-				if (is_low_point) {
+				if (is_low_point) [[unlikely]] {
 					risk_level_sum += h + 1;
 					basins.insert(compute_basin_size(heights, irow, icol));
 					// Only keep the three largest basins at any given moment, to save memory.

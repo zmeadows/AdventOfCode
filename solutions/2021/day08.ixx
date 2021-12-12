@@ -1,6 +1,15 @@
-module;
-#include "common.h"
 export module day08;
+
+import types;
+import parse;
+import utils;
+
+import <algorithm>;
+import <compare>;
+import <string>;
+import <unordered_map>;
+import <unordered_set>;
+import <vector>;
 
 struct Entry {
 	std::vector<std::string> patterns;
@@ -65,7 +74,7 @@ export struct Day8 {
 	using InputType = std::vector<Entry>;
 	static InputType prepare_input()
 	{
-		auto lines = read_lines("8a.txt");
+		auto lines = read_lines("2021/8a.txt");
 
 		std::vector<Entry> entries;
 		entries.reserve(lines.size());

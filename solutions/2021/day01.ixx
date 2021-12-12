@@ -1,6 +1,10 @@
-module;
-#include "common.h"
 export module day01;
+
+import types;
+import parse;
+
+import <utility>;
+import <vector>;
 
 export struct Day1 {
 	static constexpr U64 DAY_NUMBER = 1;
@@ -8,7 +12,7 @@ export struct Day1 {
 	using InputType = std::vector<S64>;
 
 	static InputType prepare_input() {
-		return read_lines_as<S64>("1a.txt");
+		return read_lines_as<S64>("2021/1a.txt");
 	}
 
 	static std::pair<U64, U64> solve(const InputType& depths)
