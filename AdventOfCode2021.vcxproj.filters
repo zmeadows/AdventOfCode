@@ -68,5 +68,13 @@
     <ClCompile Include="common\v2.ixx">
       <Filter>Common</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\2021\day13.ixx">
+      <Filter>Solutions\2021</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="common\radix_sort.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

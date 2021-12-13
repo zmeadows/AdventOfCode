@@ -69,7 +69,7 @@
       <EnableModules>false</EnableModules>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
       <TranslateIncludes>false</TranslateIncludes>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\AdventOfCodeCommon\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -98,7 +98,7 @@
       <EnableModules>false</EnableModules>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
       <TranslateIncludes>false</TranslateIncludes>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\AdventOfCodeCommon\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,6 +128,10 @@
     <ClCompile Include="solutions\2021\day10.ixx" />
     <ClCompile Include="solutions\2021\day11.ixx" />
     <ClCompile Include="solutions\2021\day12.ixx" />
+    <ClCompile Include="solutions\2021\day13.ixx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="common\radix_sort.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

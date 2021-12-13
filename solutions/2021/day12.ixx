@@ -78,7 +78,7 @@ static inline void traverse_two(
 
 export struct Day12 {
 	static constexpr U64 DAY_NUMBER = 12;
-	static constexpr std::pair<U64, U64> SOLUTION = { 4691, 0 };
+	static constexpr std::pair<U64, U64> SOLUTION = { 4691, 140718 };
 	using InputType = std::vector<std::string>;
 
 	static InputType prepare_input() {
