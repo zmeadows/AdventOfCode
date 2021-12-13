@@ -111,6 +111,7 @@
   <ItemGroup>
     <ClCompile Include="benchmark.ixx" />
     <ClCompile Include="bitwise.ixx" />
+    <ClCompile Include="day12.ixx" />
     <ClCompile Include="main.ixx" />
     <ClCompile Include="parse.ixx" />
     <ClCompile Include="solutions\2021\day01.ixx" />

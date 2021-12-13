@@ -43,7 +43,7 @@ https://github.com/MichalMarsalek/Advent-of-code/tree/master/2021/Nim
 export template <typename Problem>
 void bench()
 {
-    constexpr double relative_precision = 0.5;
+    constexpr double relative_precision = 0.2;
 
     const auto input = Problem::prepare_input();
 
@@ -95,6 +95,6 @@ void bench()
         // std::cout << '\r' << "iterations completed: " << std::setw(2) << std::setfill('0') << total_iterations << std::flush;
     } while (stddev() / std::abs(mean) > relative_precision && count < 1e7);
 
-	std::wcout << "Day " << Problem::DAY_NUMBER << " solve time : " << 1e6 * mean << "\u03BCs + / -" << stddev() << " (microseconds)" << std::endl;
+	std::cout << "Day " << Problem::DAY_NUMBER << " solve time: " << 1e6 * mean << " microseconds" << std::endl;
 }
 

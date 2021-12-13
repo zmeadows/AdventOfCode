@@ -11,11 +11,12 @@ import day08;
 import day09;
 import day10;
 import day11;
+import day12;
 
 import benchmark;
 import utils;
 
-using LastDay = Day11;
+using LastDay = Day12;
 
 enum class Mode {
     BenchmarkLatest,
@@ -24,9 +25,9 @@ enum class Mode {
     TestAll
 };
 
-//constexpr Mode mode = Mode::BenchmarkLatest;
+constexpr Mode mode = Mode::BenchmarkLatest;
 //constexpr Mode mode = Mode::TestLatest;
-constexpr Mode mode = Mode::BenchmarkAll;
+//constexpr Mode mode = Mode::BenchmarkAll;
 //constexpr Mode mode = Mode::TestAll;
 
 export int main()
@@ -36,7 +37,7 @@ export int main()
 
 	switch (mode) {
 		case Mode::BenchmarkLatest: {
-			// bench<LastDay>();
+			bench<LastDay>();
 			break;
 		}
 		case Mode::BenchmarkAll: {
@@ -51,10 +52,11 @@ export int main()
 			bench<Day9>();
 			bench<Day10>();
 			bench<Day11>();
+			bench<Day12>();
 			break;
 		}
 		case Mode::TestLatest: {
-			// test<LastDay>();
+			test<LastDay>();
 			break;
 
 		}
@@ -70,6 +72,7 @@ export int main()
 			test<Day9>();
 			test<Day10>();
 			test<Day11>();
+			test<Day12>();
 			break;
 		}
 	}

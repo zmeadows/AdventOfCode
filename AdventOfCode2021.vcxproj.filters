@@ -69,6 +69,9 @@
     <ClCompile Include="solutions\2021\day11.ixx">
       <Filter>Solutions\2021</Filter>
     </ClCompile>
+    <ClCompile Include="day12.ixx">
+      <Filter>Solutions\2021</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
