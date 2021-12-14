@@ -13,11 +13,12 @@ import day10;
 import day11;
 import day12;
 import day13;
+import day14;
 
 import benchmark;
 import utils;
 
-using LastDay = Day8;
+using LastDay = Day14;
 
 enum class Mode {
     BenchmarkLatest,
@@ -27,8 +28,8 @@ enum class Mode {
 };
 
 //constexpr Mode mode = Mode::BenchmarkLatest;
-//constexpr Mode mode = Mode::TestLatest;
-constexpr Mode mode = Mode::BenchmarkAll;
+constexpr Mode mode = Mode::TestLatest;
+//constexpr Mode mode = Mode::BenchmarkAll;
 //constexpr Mode mode = Mode::TestAll;
 
 export int main()
