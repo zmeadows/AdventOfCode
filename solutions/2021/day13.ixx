@@ -87,12 +87,13 @@ export struct Day13 {
 			fold_idx++;
 		};
 
-		std::sort(dots.begin(), dots.end());
-		auto it = std::unique(dots.begin(), dots.end());
-		dots.resize(std::distance(dots.begin(), it));
-		perform_next_fold();
-
-		answer.first = dots.size();
+		{ // part one
+			perform_next_fold();
+			std::sort(dots.begin(), dots.end());
+			auto it = std::unique(dots.begin(), dots.end());
+			dots.resize(std::distance(dots.begin(), it));
+			answer.first = dots.size();
+		}
 
 		while (fold_idx < FOLDS.size()) perform_next_fold();
 
