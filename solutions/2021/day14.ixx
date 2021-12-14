@@ -66,7 +66,7 @@ export struct Day14 {
 				char_counts[k.second] += v.first;
 			}
 
-			std::pair<U64, U64> bounds = { std::numeric_limits<U64>::max(),std::numeric_limits<U64>::min() };
+			std::pair<U64, U64> bounds = { std::numeric_limits<U64>::max(), 0 };
 			for (const auto& [_, c] : char_counts)
 				bounds = { std::min(bounds.first, c/2), std::max(bounds.second, c/2) };
 			return bounds.second - bounds.first;

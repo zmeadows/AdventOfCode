@@ -18,7 +18,7 @@ import day14;
 import benchmark;
 import utils;
 
-using LastDay = Day14;
+using LastDay = Day13;
 
 enum class Mode {
     BenchmarkLatest,
@@ -27,8 +27,8 @@ enum class Mode {
     TestAll
 };
 
-//constexpr Mode mode = Mode::BenchmarkLatest;
-constexpr Mode mode = Mode::TestLatest;
+constexpr Mode mode = Mode::BenchmarkLatest;
+//constexpr Mode mode = Mode::TestLatest;
 //constexpr Mode mode = Mode::BenchmarkAll;
 //constexpr Mode mode = Mode::TestAll;
 
@@ -57,6 +57,7 @@ export int main()
 			total_microseconds += bench<Day11>();
 			total_microseconds += bench<Day12>();
 			total_microseconds += bench<Day13>();
+			total_microseconds += bench<Day14>();
 			print("Total: {} microseconds\n", total_microseconds);
 			break;
 		}
@@ -79,6 +80,7 @@ export int main()
 			test<Day11>();
 			test<Day12>();
 			test<Day13>();
+			test<Day14>();
 			break;
 		}
 	}
