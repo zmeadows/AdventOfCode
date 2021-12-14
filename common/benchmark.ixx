@@ -8,6 +8,9 @@ import <iostream>;
 
 using namespace std::chrono;
 
+import types;
+
+
 // https://www.reddit.com/r/adventofcode/comments/rdrewg/2021_my_aim_is_for_all_of_this_years_solutions_to/
 
 /*
@@ -41,7 +44,7 @@ https://github.com/MichalMarsalek/Advent-of-code/tree/master/2021/Nim
 */
 
 export template <typename Problem>
-void bench()
+U64 bench()
 {
     constexpr double relative_precision = 0.5;
 
@@ -75,26 +78,26 @@ void bench()
 
     do { // the actual iteration benchmarking
         const auto iter_start_time = high_resolution_clock::now();
+
         for (size_t ichunk = 0; ichunk < bench_chunk_size; ichunk++) {
             Problem::solve(input);
         }
+
         const auto iteration_end_time = high_resolution_clock::now();
         const double chunk_duration = duration_cast<duration<double>>(iteration_end_time - iter_start_time).count();
-
         const double mean_in_chunk = chunk_duration / (double)bench_chunk_size;
 
-        {
-            count += 1.0;
-            const double delta = mean_in_chunk - mean;
-            mean += delta / count;
-            const double delta2 = mean_in_chunk - mean;
-            M2 += delta * delta2;
-        }
+		count += 1.0;
+		const double delta = mean_in_chunk - mean;
+		mean += delta / count;
+		const double delta2 = mean_in_chunk - mean;
+		M2 += delta * delta2;
 
-        // const size_t total_iterations = (size_t)count * in_chunks_of;
-        // std::cout << '\r' << "iterations completed: " << std::setw(2) << std::setfill('0') << total_iterations << std::flush;
     } while (stddev() / std::abs(mean) > relative_precision && count < 1e7);
 
-	std::cout << "Day " << Problem::DAY_NUMBER << " solve time: " << 1e6 * mean << " microseconds" << std::endl;
+    const U64 time_microseconds = std::max(1ULL, static_cast<U64>(round(1e6 * mean)));
+	std::cout << "Day " << Problem::DAY_NUMBER << " solve time: " << time_microseconds << " microseconds" << std::endl;
+
+    return time_microseconds;
 }
 

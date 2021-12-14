@@ -26,9 +26,9 @@ enum class Mode {
     TestAll
 };
 
-constexpr Mode mode = Mode::BenchmarkLatest;
+//constexpr Mode mode = Mode::BenchmarkLatest;
 //constexpr Mode mode = Mode::TestLatest;
-//constexpr Mode mode = Mode::BenchmarkAll;
+constexpr Mode mode = Mode::BenchmarkAll;
 //constexpr Mode mode = Mode::TestAll;
 
 export int main()
@@ -42,19 +42,21 @@ export int main()
 			break;
 		}
 		case Mode::BenchmarkAll: {
-			bench<Day1>();
-			bench<Day2>();
-			bench<Day3>();
-			bench<Day4>();
-			bench<Day5>();
-			bench<Day6>();
-			bench<Day7>();
-			bench<Day8>();
-			bench<Day9>();
-			bench<Day10>();
-			bench<Day11>();
-			bench<Day12>();
-			bench<Day13>();
+			U64 total_microseconds = 0;
+			total_microseconds += bench<Day1>();
+			total_microseconds += bench<Day2>();
+			total_microseconds += bench<Day3>();
+			total_microseconds += bench<Day4>();
+			total_microseconds += bench<Day5>();
+			total_microseconds += bench<Day6>();
+			total_microseconds += bench<Day7>();
+			total_microseconds += bench<Day8>();
+			total_microseconds += bench<Day9>();
+			total_microseconds += bench<Day10>();
+			total_microseconds += bench<Day11>();
+			total_microseconds += bench<Day12>();
+			total_microseconds += bench<Day13>();
+			print("Total: {} microseconds\n", total_microseconds);
 			break;
 		}
 		case Mode::TestLatest: {
