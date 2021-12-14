@@ -76,5 +76,8 @@
     <ClInclude Include="common\radix_sort.hpp">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="common\flat_hash_map.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

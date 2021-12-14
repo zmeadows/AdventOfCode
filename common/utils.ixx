@@ -1,16 +1,16 @@
-module;
-#include <algorithm>
-#include <cassert>
-#include <format>
-#include <iostream>
-#include <iterator>
-#include <numeric>
-#include <string>
-#include <vector>
-#include <utility>
 export module utils;
 
 import types;
+
+import <algorithm>;
+import <cassert>;
+import <format>;
+import <iostream>;
+import <iterator>;
+import <numeric>;
+import <string>;
+import <vector>;
+import <utility>;
 
 export inline S64 average(const std::vector<S64>& vec)
 {
