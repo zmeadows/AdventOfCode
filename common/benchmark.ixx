@@ -43,7 +43,7 @@ https://github.com/MichalMarsalek/Advent-of-code/tree/master/2021/Nim
 export template <typename Problem>
 void bench()
 {
-    constexpr double relative_precision = 0.25;
+    constexpr double relative_precision = 0.5;
 
     const auto input = Problem::prepare_input();
 

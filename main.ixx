@@ -17,7 +17,7 @@ import day13;
 import benchmark;
 import utils;
 
-using LastDay = Day12;
+using LastDay = Day8;
 
 enum class Mode {
     BenchmarkLatest,

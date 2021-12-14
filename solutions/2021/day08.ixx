@@ -5,6 +5,7 @@ import parse;
 import utils;
 
 import <algorithm>;
+import <array>;
 import <compare>;
 import <string>;
 import <unordered_map>;
@@ -20,29 +21,36 @@ static const std::unordered_map<U64, U64> UNIQUE_DIGITS = { {2, 1}, {3, 7}, {4, 
 
 static U64 decode(const Entry& entry)
 {
-	std::unordered_set<std::string> patterns_remaining(
-		entry.patterns.begin(), entry.patterns.end()
-	);
+	std::vector<std::string> patterns_remaining;
+	patterns_remaining.reserve(6);
 
-	std::unordered_map<U64, std::string> segment_matches;
+	std::array<std::string, 10> segment_matches = {""};
 
 	for (const std::string& pattern : entry.patterns) {
-		if (auto it = UNIQUE_DIGITS.find(pattern.size()); it != UNIQUE_DIGITS.end()) {
-			segment_matches[it->second] = pattern;
-			patterns_remaining.erase(pattern);
+		const auto nsegs = pattern.size();
+		if (nsegs == 2) {
+			segment_matches[1] = pattern;
+		} else if (nsegs == 3) {
+			segment_matches[7] = pattern;
+		} else if (nsegs == 4) {
+			segment_matches[4] = pattern;
+		} else if (nsegs == 7) {
+			segment_matches[8] = pattern;
+		} else {
+			patterns_remaining.push_back(pattern);
 		}
 	}
 
+	std::string buffer; buffer.reserve(7);
 	auto decode_digit = [&](U64 digit, U64 nsegs, auto&& setop, U64 compdig, U64 compres) {
 		for (const std::string& pattern : patterns_remaining) {
 			if (pattern.size() == nsegs) {
-				const std::string& segments = segment_matches.at(compdig);
-				std::string buffer;
+				const std::string& segments = segment_matches[compdig];
+				buffer.clear();
 				setop(pattern, segments, buffer);
 				if (buffer.size() == compres) {
 					segment_matches[digit] = pattern;
-					// NOTE: calling 'erase' invalidates future iteration, but we're returning immediately.
-					patterns_remaining.erase(pattern);
+					std::erase(patterns_remaining, pattern);
 					return;
 				}
 			}
@@ -56,13 +64,11 @@ static U64 decode(const Entry& entry)
 	decode_digit(5, 5, intersect<std::string>, 6, 5);
 	decode_digit(3, 5, intersect<std::string>, 6, 4);
 
-	std::unordered_map<std::string, U64> decoded_segments;
-	for (const auto& [k, v] : segment_matches)
-		decoded_segments.emplace(v, k);
-
 	U64 answer = 0;
-	for (const std::string& digit_pattern : entry.output)
-		answer = 10 * answer + decoded_segments.at(digit_pattern);
+	for (const std::string& digit_pattern : entry.output) {
+		answer = 10 * answer + std::distance(segment_matches.begin(),
+			std::find(segment_matches.begin(), segment_matches.end(), digit_pattern));
+	}
 
 	return answer;
 }
@@ -70,30 +76,26 @@ static U64 decode(const Entry& entry)
 export struct Day8 {
 	static constexpr U64 DAY_NUMBER = 8;
 	static constexpr std::pair<U64, U64> SOLUTION = { 476, 1011823 };
-
 	using InputType = std::vector<Entry>;
+
 	static InputType prepare_input()
 	{
 		auto lines = read_lines("2021/8a.txt");
 
-		std::vector<Entry> entries;
-		entries.reserve(lines.size());
+		std::vector<Entry> entries; entries.reserve(lines.size());
 
 		for (const std::string& line : lines) {
 			Entry entry;
-
 			bool hit_delimiter = false;
+
 			for (std::string& word : split(line)) {
 				if (word == "|") {
 					hit_delimiter = true;
 					continue;
 				}
-
 				std::sort(word.begin(), word.end());
-				if (hit_delimiter)
-					entry.output.emplace_back(std::move(word));
-				else
-					entry.patterns.emplace_back(std::move(word));
+				if (hit_delimiter) entry.output.emplace_back(std::move(word));
+				else entry.patterns.emplace_back(std::move(word));
 			}
 
 			entries.emplace_back(std::move(entry));
@@ -114,8 +116,7 @@ export struct Day8 {
 			}
 		}
 
-		for (const Entry& entry : entries)
-			answer.second += decode(entry);
+		for (const Entry& entry : entries) answer.second += decode(entry);
 
 		return answer;
 	}
