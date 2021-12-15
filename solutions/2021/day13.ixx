@@ -108,11 +108,7 @@ export struct Day13 {
 			for (U16 y = 0; y <= paper_height; y++) {
 				for (U16 x = 0; x <= paper_width; x++) {
 					auto it = std::find(dots.begin(), dots.end(), std::make_pair(x,y));
-					if (it != dots.end()) {
-						print("#");
-					} else {
-						print(" ");
-					}
+					print(it != dots.end() ? "#" : " ");
 				}
 				print("\n");
 			}

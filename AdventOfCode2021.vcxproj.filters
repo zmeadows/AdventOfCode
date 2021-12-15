@@ -74,6 +74,9 @@
     <ClCompile Include="solutions\2021\day14.ixx">
       <Filter>Solutions\2021</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\2021\day15.ixx">
+      <Filter>Solutions\2021</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\radix_sort.hpp">
