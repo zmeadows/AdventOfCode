@@ -67,12 +67,12 @@ https://github.com/MichalMarsalek/Advent-of-code/tree/master/2021/Nim
 export template <typename Problem>
 U64 bench()
 {
-    constexpr double relative_precision = 0.5;
+    constexpr double relative_precision = 0.25;
 
     const auto input = Problem::prepare_input();
 
     // first find appropriate benchmark chunk size
-    uint64_t in_chunks_of = 1;
+    uint64_t in_chunks_of = 5;
     double chunk_time = 0.0;
     double total_test_time = 0;
     double total_test_iterations = 0.0;

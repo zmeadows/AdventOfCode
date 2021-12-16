@@ -53,22 +53,9 @@ export struct Day15 {
 		const U16 ROWS = matrix.size();
 		const U16 COLS = matrix[0].size();
 
-		std::vector<std::vector<U32>> distances(ROWS, std::vector<U32>(COLS, std::numeric_limits<U32>::max()));
-		std::vector<std::vector<bool>> unvisited(ROWS, std::vector<bool>(COLS, true));
 
-		std::priority_queue<Cell, std::vector<Cell>, std::greater<Cell>> Q;
-		for (U16 x = 0; x < COLS; x++) {
-			for (U16 y = 0; y < ROWS; y++) {
-				Q.emplace(Cell{ x, y , std::numeric_limits<U32>::max()});
-			}
-		}
-
-		auto update_distance = [&](U16 x, U16 y, U32 new_distance) {
-			distances[y][x] = new_distance;
-			Q.emplace(Cell{ x, y, new_distance });
-		};
-
-		std::vector<std::pair<U16, U16>> neighbors; neighbors.reserve(4);
+		std::vector<std::pair<U16, U16>> neighbors;
+		neighbors.reserve(4);
 		auto compute_neighbors = [&](U16 x, U16 y) {
 			neighbors.clear();
 			if (x > 0) neighbors.emplace_back(x - 1, y);
@@ -77,26 +64,33 @@ export struct Day15 {
 			if (y < ROWS - 1) neighbors.emplace_back(x, y + 1);
 		};
 
-		update_distance(0, 0, 0);
+		std::priority_queue<Cell, std::vector<Cell>, std::greater<Cell>> Q;
+		std::vector<std::vector<U32>> distances(ROWS, std::vector<U32>(COLS, std::numeric_limits<U32>::max()));
+		std::vector<std::vector<bool>> unvisited(ROWS, std::vector<bool>(COLS, true));
+
+		distances[0][0] = 0;
 		unvisited[0][0] = false;
+		Q.emplace(Cell{ 0,0,0 });
 
 		U16 x_current = 0, y_current = 0;
-
 		while (unvisited.back().back()) {
-			const U64 d0 = distances[y_current][x_current];
+			const U64 distance_current = distances[y_current][x_current];
 
 			compute_neighbors(x_current, y_current);
-			for (const auto& [nx,ny] : neighbors) {
-				if (unvisited[ny][nx]) {
-					const U32 dalt = d0 + matrix[ny][nx];
-					if (dalt < distances[ny][nx]) update_distance(nx, ny, dalt);
+			for (const auto& [nx, ny] : neighbors) {
+				const U32 new_distance = distance_current + matrix[ny][nx];
+				if (new_distance < distances[ny][nx]) {
+					distances[ny][nx] = new_distance;
+					Q.emplace(Cell{ nx, ny, new_distance });
 				}
 			}
 
 			unvisited[y_current][x_current] = false;
 
+			Cell next;
 			while (!Q.empty()) {
-				Cell next = Q.top(); Q.pop();
+				Cell next = Q.top();
+				Q.pop();
 				if (unvisited[next.y][next.x] && next.distance == distances[next.y][next.x]) {
 					x_current = next.x;
 					y_current = next.y;
@@ -107,7 +101,6 @@ export struct Day15 {
 
 		return static_cast<U64>(distances.back().back());
 	}
-
 
 	static std::pair<U64, U64> solve(const InputType& input)
 	{
@@ -124,15 +117,15 @@ export struct Day15 {
 		for (U64 irow = 0; irow < BIG_ROWS; irow++)
 			big_matrix.emplace_back(BIG_COLS, 0ULL);
 
-		for (U64 y = 0; y < BIG_ROWS; y++) {
-			const U64 old_y = y % ROWS;
-			const U64 delta_y = y / ROWS;
-			for (U64 x = 0; x < BIG_COLS; x++) {
-				const U64 old_x = x % COLS;
-				const U64 delta_x = x / COLS;
-				U64 new_val = input[old_y][old_x] + delta_x + delta_y;
-				if (new_val > 9) new_val -= 9;
-				big_matrix[y][x] = new_val;
+		for (U64 j = 0; j < 5; j++) {
+			for (U64 i = 0; i < 5; i++) {
+				for (U64 y = 0; y < ROWS; y++) {
+					for (U64 x = 0; x < COLS; x++) {
+						auto new_val = input[y][x] + i + j;
+						if (new_val > 9) new_val -= 9;
+						big_matrix[j * ROWS + y][i * COLS + x] = new_val;
+					}
+				}
 			}
 		}
 
