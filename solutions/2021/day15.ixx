@@ -53,9 +53,7 @@ export struct Day15 {
 		const U16 ROWS = matrix.size();
 		const U16 COLS = matrix[0].size();
 
-
-		std::vector<std::pair<U16, U16>> neighbors;
-		neighbors.reserve(4);
+		std::vector<std::pair<U16, U16>> neighbors; neighbors.reserve(4);
 		auto compute_neighbors = [&](U16 x, U16 y) {
 			neighbors.clear();
 			if (x > 0) neighbors.emplace_back(x - 1, y);
@@ -87,7 +85,6 @@ export struct Day15 {
 
 			unvisited[y_current][x_current] = false;
 
-			Cell next;
 			while (!Q.empty()) {
 				Cell next = Q.top();
 				Q.pop();
@@ -121,7 +118,7 @@ export struct Day15 {
 			for (U64 i = 0; i < 5; i++) {
 				for (U64 y = 0; y < ROWS; y++) {
 					for (U64 x = 0; x < COLS; x++) {
-						auto new_val = input[y][x] + i + j;
+						U8 new_val = input[y][x] + i + j;
 						if (new_val > 9) new_val -= 9;
 						big_matrix[j * ROWS + y][i * COLS + x] = new_val;
 					}

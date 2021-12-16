@@ -65,6 +65,13 @@ export std::vector<std::string> read_lines(const std::string& input_file)
 	return results;
 }
 
+export std::string read_line(const std::string& input_file, U64 expected_len = 0) {
+	std::ifstream infile = open_input_file(input_file);
+	std::string line; line.reserve(expected_len);
+	std::getline(infile, line);
+	return line;
+}
+
 export std::pair<std::vector<U64>, U64> read_binary_numbers_from_file(const std::string& input_file)
 {
 	std::ifstream infile = open_input_file(input_file);

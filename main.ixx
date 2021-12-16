@@ -15,11 +15,15 @@ import day12;
 import day13;
 import day14;
 import day15;
+import day16;
 
 import benchmark;
 import utils;
 
-using LastDay = Day15;
+import <iostream>;
+import <iomanip>;
+
+using LastDay = Day16;
 
 enum class Mode {
     BenchmarkLatest,
@@ -35,8 +39,8 @@ constexpr Mode mode = Mode::TestLatest;
 
 export int main()
 {
-    //std::ios::sync_with_stdio(false);
-    //std::cin.tie(NULL);
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(NULL);
 
 	switch (mode) {
 		case Mode::BenchmarkLatest: {
@@ -60,6 +64,7 @@ export int main()
 			total_microseconds += bench<Day13>();
 			total_microseconds += bench<Day14>();
 			total_microseconds += bench<Day15>();
+			total_microseconds += bench<Day16>();
 			print("Total: {} microseconds\n", total_microseconds);
 			break;
 		}
@@ -84,6 +89,7 @@ export int main()
 			test<Day13>();
 			test<Day14>();
 			test<Day15>();
+			test<Day16>();
 			break;
 		}
 	}

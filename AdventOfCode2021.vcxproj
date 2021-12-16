@@ -111,6 +111,7 @@
   <ItemGroup>
     <ClCompile Include="common\benchmark.ixx" />
     <ClCompile Include="common\bitwise.ixx" />
+    <ClCompile Include="common\decoder.ixx" />
     <ClCompile Include="common\parse.ixx" />
     <ClCompile Include="common\types.ixx" />
     <ClCompile Include="common\utils.ixx" />
@@ -131,6 +132,7 @@
     <ClCompile Include="solutions\2021\day13.ixx" />
     <ClCompile Include="solutions\2021\day14.ixx" />
     <ClCompile Include="solutions\2021\day15.ixx" />
+    <ClCompile Include="solutions\2021\day16.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\flat_hash_map.hpp" />
