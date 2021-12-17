@@ -16,6 +16,7 @@ import day13;
 import day14;
 import day15;
 import day16;
+import day17;
 
 import benchmark;
 import utils;
@@ -23,7 +24,7 @@ import utils;
 import <iostream>;
 import <iomanip>;
 
-using LastDay = Day16;
+using LastDay = Day17;
 
 enum class Mode {
     BenchmarkLatest,
@@ -65,6 +66,7 @@ export int main()
 			total_microseconds += bench<Day14>();
 			total_microseconds += bench<Day15>();
 			total_microseconds += bench<Day16>();
+			total_microseconds += bench<Day17>();
 			print("Total: {} microseconds\n", total_microseconds);
 			break;
 		}
@@ -90,6 +92,7 @@ export int main()
 			test<Day14>();
 			test<Day15>();
 			test<Day16>();
+			test<Day17>();
 			break;
 		}
 	}

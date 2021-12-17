@@ -36,6 +36,7 @@ struct PacketDecoder {
 U64 parse_packet(PacketDecoder&);
 
 static __forceinline U64 read_bits(PacketDecoder& decoder, U64 nbits) {
+	assert(nbits <= 64);
 	U64 result = 0;
 	while (nbits > 0) result += decoder.bits[decoder.tip++] << --nbits;
 	assert(decoder.tip <= decoder.bits.size());
