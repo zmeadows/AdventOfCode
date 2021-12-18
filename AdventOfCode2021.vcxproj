@@ -134,6 +134,7 @@
     <ClCompile Include="solutions\2021\day15.ixx" />
     <ClCompile Include="solutions\2021\day16.ixx" />
     <ClCompile Include="solutions\2021\day17.ixx" />
+    <ClCompile Include="solutions\2021\day18.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\flat_hash_map.hpp" />

@@ -4,28 +4,24 @@ export module day17;
 
 import types;
 
-import <string>;
 import <utility>;
 
 export struct Day17 {
 	static constexpr U64 DAY_NUMBER = 17;
 	static constexpr std::pair<U64, U64> SOLUTION = { 6786, 2313 };
-
 	using InputType = U64;
 
-	static constexpr S64 XMIN_TARGET = 155;
-	static constexpr S64 XMAX_TARGET = 182;
-	static constexpr S64 YMIN_TARGET = -117;
-	static constexpr S64 YMAX_TARGET = -67;
+	//static constexpr S64 XMIN_TARGET = 20000, XMAX_TARGET = 30000;
+	//static constexpr S64 YMIN_TARGET = -10000, YMAX_TARGET = -5000;
+	static constexpr S64 XMIN_TARGET = 155, XMAX_TARGET = 182;
+	static constexpr S64 YMIN_TARGET = -117, YMAX_TARGET = -67;
 
 	static InputType prepare_input() { return 0ULL; }
 
 	static std::pair<U64, U64> solve(U64)
 	{
-		const S64 VX_MAX = XMAX_TARGET;
-		const S64 VX_MIN = 1;
-		const S64 VY_MIN = YMIN_TARGET;
-		const S64 VY_MAX = std::abs(YMIN_TARGET) - 1;
+		const S64 VX_MIN = 1, VX_MAX = XMAX_TARGET;
+		const S64 VY_MIN = YMIN_TARGET, VY_MAX = std::abs(YMIN_TARGET) - 1;
 
 		auto step_y = [](S64 v0, S64 n) -> S64 {
 			return n * v0 - n * (n - 1) / 2;
@@ -51,9 +47,8 @@ export struct Day17 {
 				S64 n = 0;
 				while (++n) {
 					const S64 s = target_status(step_x(vx, n), step_y(vy, n));
-					if (s == -1) {
-						break;
-					} else if (s == 1) {
+					if (s == -1) break;
+					else if (s == 1) {
 						count++;
 						break;
 					}
