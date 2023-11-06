@@ -17,9 +17,9 @@ struct Entry {
 	std::vector<std::string> output;
 };
 
-static const std::unordered_map<U64, U64> UNIQUE_DIGITS = { {2, 1}, {3, 7}, {4, 4}, {7, 8} };
+const std::unordered_map<U64, U64> UNIQUE_DIGITS = { {2, 1}, {3, 7}, {4, 4}, {7, 8} };
 
-static U64 decode(const Entry& entry)
+U64 decode(const Entry& entry)
 {
 	std::vector<std::string> patterns_remaining;
 	patterns_remaining.reserve(6);

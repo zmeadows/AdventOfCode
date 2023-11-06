@@ -8,7 +8,7 @@ import bitwise;
 
 import <vector>;
 
-static __forceinline S64 bit_balance(const std::vector<U64>& numbers, size_t idx) {
+__forceinline S64 bit_balance(const std::vector<U64>& numbers, size_t idx) {
 	S64 balance = 0;
 	for (U64 n : numbers) {
 		balance += check_bit(n, idx) ? 1 : -1;
@@ -21,7 +21,7 @@ enum class Rating {
 	CO2Scrubber
 };
 
-static U64 find_rating(const std::vector<U64>& report, Rating type, U64 max_bits) {
+U64 find_rating(const std::vector<U64>& report, Rating type, U64 max_bits) {
 	std::vector<U64> buffer(report);
 
 	S64 idx = max_bits - 1;

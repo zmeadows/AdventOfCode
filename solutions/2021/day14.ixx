@@ -1,5 +1,3 @@
-module;
-#include "flat_hash_map.hpp"
 export module day14;
 
 import parse;
@@ -23,7 +21,7 @@ export struct Day14 {
 
 	using InputType = std::tuple<
 		std::string, // polymer template
-		ska::flat_hash_map<std::pair<char, char>, char, hash_pair>, // pair insertion rules
+		std::unordered_map<std::pair<char, char>, char, hash_pair>, // pair insertion rules
 		U64 // number of unique letters
 	>;
 
@@ -34,7 +32,7 @@ export struct Day14 {
 		std::unordered_set<char> elements;
 		elements.reserve(input[0].size());
 
-		ska::flat_hash_map<std::pair<char, char>, char, hash_pair> rules;
+		std::unordered_map<std::pair<char, char>, char, hash_pair> rules;
 		rules.reserve(input.size() - 2);
 
 		for (U64 idx = 2; idx < input.size(); idx++) {
@@ -50,7 +48,7 @@ export struct Day14 {
 	{
 		const auto& [start, insertion_rules, nletters] = input;
 
-		ska::flat_hash_map<std::pair<char, char>, std::pair<S64, S64>, hash_pair> counts;
+		std::unordered_map<std::pair<char, char>, std::pair<S64, S64>, hash_pair> counts;
 		counts.reserve(insertion_rules.size());
 
 		for (U64 i = 0; i < start.size() - 1; i++)
@@ -67,7 +65,7 @@ export struct Day14 {
 			for (auto& [_, v] : counts) v = { v.first + v.second, 0 };
 		};
 
-		ska::flat_hash_map<char, U64> char_counts; char_counts.reserve(nletters);
+		std::unordered_map<char, U64> char_counts; char_counts.reserve(nletters);
 
 		auto compute_answer = [&]() -> U64 {
 			char_counts = { {start.front(), 1}, {start.back(), 1} };

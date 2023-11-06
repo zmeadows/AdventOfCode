@@ -69,7 +69,7 @@ export int main()
 			total_microseconds += bench<Day16>();
 			total_microseconds += bench<Day17>();
 			total_microseconds += bench<Day18>();
-			print("Total: {} microseconds\n", total_microseconds);
+            std::cout << std::format("Total: {} microseconds\n", total_microseconds);
 			break;
 		}
 		case Mode::TestLatest: {

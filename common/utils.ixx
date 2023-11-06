@@ -57,17 +57,11 @@ inline T clamp(T val, T low, T high) {
 	else return val;
 }
 
-export template <typename FmtType, class... Args>
-void __forceinline print(const FmtType& fmt, Args&& ...args)
-{
-	std::cout << std::format(fmt, std::forward<Args>(args)...);
-}
-
 export template <typename Problem>
 void test() {
 	const std::pair<U64, U64> answer = Problem::solve(Problem::prepare_input());
 	const bool success = (answer.first == Problem::SOLUTION.first) && (answer.second == Problem::SOLUTION.second);
 	const std::string result = success ? "SUCCESS" : "FAILURE";
-	print("Day {:<2} => [ {:^15} , {:^17} ] {:>8}!\n",
-		  Problem::DAY_NUMBER, answer.first, answer.second, result);
+	std::cout << std::format("Day {:<2} => [ {:^15} , {:^17} ] {:>8}!\n",
+		                     Problem::DAY_NUMBER, answer.first, answer.second, result);
 }

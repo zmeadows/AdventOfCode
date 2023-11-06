@@ -10,7 +10,7 @@ import parse;
 
 using Board = Grid<S64, 5, 5>;
 
-static __forceinline bool check_row(
+__forceinline bool check_row(
 	const Board& board, const std::unordered_set<S64>& calls, size_t row_idx)
 {
 	for (size_t col_idx = 0; col_idx < 5; col_idx++) {
@@ -22,7 +22,7 @@ static __forceinline bool check_row(
 	return true;
 }
 
-static __forceinline bool check_col(
+__forceinline bool check_col(
 	const Board& board, const std::unordered_set<S64>& calls, size_t col_idx)
 {
 	for (size_t row_idx = 0; row_idx < 5; row_idx++) {
@@ -34,7 +34,7 @@ static __forceinline bool check_col(
 	return true;
 }
 
-static __forceinline bool check_board(const Board& board, const std::unordered_set<S64>& calls)
+__forceinline bool check_board(const Board& board, const std::unordered_set<S64>& calls)
 {
 	for (size_t row_idx = 0; row_idx < 5; row_idx++) {
 		if (check_row(board, calls, row_idx)) {
@@ -51,7 +51,7 @@ static __forceinline bool check_board(const Board& board, const std::unordered_s
 	return false;
 }
 
-static S64 score_board(
+S64 score_board(
 	const Board& board,
 	const std::unordered_set<S64>& winning_calls,
 	const std::vector<S64>& call_order)

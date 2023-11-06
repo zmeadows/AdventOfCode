@@ -1,11 +1,10 @@
-module;
-#include <cassert>
 export module day18;
 
 import parse;
 import types;
 
 import <array>;
+import <assert.h>;
 import <string>;
 import <utility>;
 import <vector>;
@@ -17,10 +16,10 @@ struct Node {
 
 };
 
-static U64 node_buffer_tip = 0;
-static Node node_buffer[1ULL << 15];
+U64 node_buffer_tip = 0;
+Node node_buffer[1ULL << 15];
 
-__forceinline Node* new_node() {
+Node* new_node() {
 	assert(node_buffer_tip < 21000);
 	Node* n = node_buffer + node_buffer_tip;
 	node_buffer_tip++;
@@ -30,11 +29,11 @@ __forceinline Node* new_node() {
 	return n;
 }
 
-__forceinline void clear_node_buffer() {
+void clear_node_buffer() {
 	node_buffer_tip = 0;
 }
 
-static __forceinline Node* _parse(const std::string& line, U64& idx) {
+Node* _parse(const std::string& line, U64& idx) {
 	static std::string strbuf;
 
 	if (line[idx] == '[') {
@@ -60,21 +59,21 @@ static __forceinline Node* _parse(const std::string& line, U64& idx) {
 	assert(false);
 }
 
-static Node* parse(const std::string& line) {
+__forceinline Node* parse(const std::string& line) {
 	U64 idx = 0;
 	return _parse(line, idx);
 }
 
-static __forceinline U64 magnitude(const Node* const node) {
+ __forceinline U64 magnitude(const Node* const node) {
 	if (!node->left && !node->right) return node->val;
 	else return 3 * magnitude(node->left) + 2 * magnitude(node->right);
 }
 
-static __forceinline bool is_leaf(Node* node) {
+__forceinline bool is_leaf(Node* node) {
 	return node->left == nullptr && node->right == nullptr;
 }
 
-static void explode_left(Node* node, const std::vector<Node*>& history, U64 addval) {
+void explode_left(Node* node, const std::vector<Node*>& history, U64 addval) {
 	if (history.empty()) return;
 
 	U64 parent_idx = history.size() - 1;
@@ -94,7 +93,7 @@ static void explode_left(Node* node, const std::vector<Node*>& history, U64 addv
 	}
 }
 
-static void explode_right(Node* node, const std::vector<Node*>& history, U64 addval) {
+void explode_right(Node* node, const std::vector<Node*>& history, U64 addval) {
 	if (history.empty()) return;
 
 	U64 parent_idx = history.size() - 1;
@@ -114,7 +113,7 @@ static void explode_right(Node* node, const std::vector<Node*>& history, U64 add
 	}
 }
 
-static __forceinline void _explode(Node* node, std::vector<Node*>& history, bool& done) {
+void _explode(Node* node, std::vector<Node*>& history, bool& done) {
 	if (done) return;
 
 	if (history.size() == 4 && node->left != nullptr) {
@@ -138,7 +137,7 @@ static __forceinline void _explode(Node* node, std::vector<Node*>& history, bool
 	history.pop_back();
 }
 
-static __forceinline Node* explode(Node* node) {
+Node* explode(Node* node) {
 	static std::vector<Node*> history;
 	history.clear();
 	bool done = false;
@@ -146,7 +145,7 @@ static __forceinline Node* explode(Node* node) {
 	return done ? node : nullptr;
 }
 
-static __forceinline void _split(Node* node, std::vector<Node*>& history, bool& done) {
+__forceinline void _split(Node* node, std::vector<Node*>& history, bool& done) {
 	if (done) return;
 
 	if (is_leaf(node) && node->val >= 10) {
@@ -175,7 +174,7 @@ __forceinline Node* split(Node* node) {
 	return done ? node : nullptr;
 }
 
-static __forceinline Node* reduce(Node* node) {
+__forceinline Node* reduce(Node* node) {
 	while (true) {
 		if (Node* new_node = explode(node); new_node != nullptr) {
 			node = new_node;
@@ -188,7 +187,7 @@ static __forceinline Node* reduce(Node* node) {
 	return node;
 }
 
-static __forceinline Node* add(Node* lexpr, Node* rexpr)
+__forceinline Node* add(Node* lexpr, Node* rexpr)
 {
 	Node* sum_node = new_node();
 	sum_node->left = lexpr;

@@ -9,7 +9,7 @@ import <string>;
 import <utility>;
 import <vector>;
 
-static void climb_basin(std::vector<std::vector<S64>>& heights, S64 init_row, S64 init_col, S64& size)
+void climb_basin(std::vector<std::vector<S64>>& heights, S64 init_row, S64 init_col, S64& size)
 {
 	// Trying to make a CPU/memory efficient flood fill here, rather than the typical naive algorithms
 	const S64 COL_COUNT = heights[0].size();
@@ -59,7 +59,7 @@ static void climb_basin(std::vector<std::vector<S64>>& heights, S64 init_row, S6
 	}
 }
 
-static __forceinline S64 compute_basin_size(std::vector<std::vector<S64>>& heights, S64 irow, S64 icol)
+__forceinline S64 compute_basin_size(std::vector<std::vector<S64>>& heights, S64 irow, S64 icol)
 {
 	S64 size = 0;
 	climb_basin(heights,  irow, icol, size);
@@ -74,9 +74,10 @@ export struct Day9 {
 	static InputType prepare_input()
 	{
 		std::vector<std::vector<S64>> heights;
+        std::vector<S64> row; row.reserve(64);
 
 		for (const std::string& rowstr : read_lines("2021/9a.txt")) {
-			std::vector<S64> row; row.reserve(rowstr.size());
+            row.clear();
 			for (char c : rowstr)
 				row.push_back(static_cast<S64>(c - '0'));
 			heights.emplace_back(std::move(row));

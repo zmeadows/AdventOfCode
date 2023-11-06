@@ -1,6 +1,5 @@
 module;
 #include <cassert>
-#include "flat_hash_map.hpp"
 export module day12;
 
 import bitwise;
@@ -15,7 +14,7 @@ import <unordered_map>;
 import <utility>;
 import <vector>;
 
-static __forceinline U32 cache_index(U8 node_id, U64 visited, bool twice) {
+__forceinline U32 cache_index(U8 node_id, U64 visited, bool twice) {
 	return static_cast<U32>(
 		static_cast<U32>(visited << 16) | static_cast<U32>(node_id << 1) | (twice ? 1UL : 0UL)
     );
@@ -29,7 +28,7 @@ U32 traverse(
 	const U8 end_id,
 	const bool twice,
 	const U64 visited,
-	ska::flat_hash_map<U32, U32>& cache)
+	std::unordered_map<U32, U32>& cache)
 {
 	const auto idx = cache_index(current_id, visited, twice);
 
@@ -117,7 +116,7 @@ export struct Day12 {
 		for (U64& mask : adjacency_masks) mask = clear_bit(mask, start_id);
 		small_mask = clear_bit(small_mask, start_id);
 
-		ska::flat_hash_map<U32, U32> cache; cache.reserve(1024);
+		std::unordered_map<U32, U32> cache; cache.reserve(1024);
 
 		std::pair<U64, U64> answer = {0ULL, 0ULL};
 		answer.first = traverse<false>(adjacency_masks, start_id, small_mask, end_id, false, 0ULL, cache);
